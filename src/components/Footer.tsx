@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-interface FooterProps {
+export interface FooterProps {
   logo?: {
     url?: string;
     alt?: string;

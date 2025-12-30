@@ -5,7 +5,7 @@ import { getPayload } from 'payload'
 import config from '../../../payload/payload.config'
 
 export async function GET(request: Request) {
-  const payload = await getPayload({ config })
+  await getPayload({ config })
   const { searchParams } = new URL(request.url)
   const secret = searchParams.get('secret')
   const url = searchParams.get('url')

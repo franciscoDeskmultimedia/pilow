@@ -1,5 +1,5 @@
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Header, { HeaderProps } from "@/components/Header";
+import Footer, { FooterProps } from "@/components/Footer";
 import BlockRenderer from "@/components/BlockRenderer";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
@@ -73,7 +73,7 @@ export default async function Home() {
   if (page && Array.isArray(page.layout) && page.layout.length > 0) {
     return (
       <>
-        <Header {...header as any} />
+        <Header {...(header as unknown as HeaderProps)} />
         <main id="main-content" role="main">
           <BlockRenderer
             blocks={page.layout as never}
@@ -82,7 +82,7 @@ export default async function Home() {
             testimonials={testimonials}
           />
         </main>
-        <Footer {...footer as any} />
+        <Footer {...(footer as unknown as FooterProps)} />
       </>
     );
   }
@@ -90,7 +90,7 @@ export default async function Home() {
   // Fallback: Render default homepage with static components
   return (
     <>
-      <Header {...header as any} />
+      <Header {...(header as unknown as HeaderProps)} />
       <main id="main-content" role="main">
         <Hero />
         <Services services={services} />
@@ -99,7 +99,7 @@ export default async function Home() {
         <Testimonials testimonials={testimonials} />
         <Contact />
       </main>
-      <Footer {...footer as any} />
+      <Footer {...(footer as unknown as FooterProps)} />
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Header, { HeaderProps } from "@/components/Header";
+import Footer, { FooterProps } from "@/components/Footer";
 import BlockRenderer from "@/components/BlockRenderer";
 import { getPageBySlug, getAllPages, getServices, getProjects, getTestimonials, getHeader, getFooter } from "@/lib/payload";
 
@@ -113,7 +113,7 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <>
-      <Header {...header as any} />
+      <Header {...(header as unknown as HeaderProps)} />
       <main id="main-content" role="main">
         {Array.isArray(page.layout) && page.layout.length > 0 ? (
           <BlockRenderer
@@ -129,7 +129,7 @@ export default async function Page({ params }: PageProps) {
           </div>
         )}
       </main>
-      <Footer {...footer as any} />
+      <Footer {...(footer as unknown as FooterProps)} />
     </>
   );
 }

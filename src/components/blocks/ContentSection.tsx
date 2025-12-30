@@ -6,7 +6,8 @@ import { useRef } from "react";
 
 interface ContentSectionProps {
   heading?: string;
-  content?: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  content?: any;
   backgroundColor?: string;
 }
 

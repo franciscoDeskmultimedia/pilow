@@ -1,17 +1,53 @@
+import { notFound } from "next/navigation";
+import { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BlockRenderer from "@/components/BlockRenderer";
-import Hero from "@/components/Hero";
-import Services from "@/components/Services";
-import Portfolio from "@/components/Portfolio";
-import About from "@/components/About";
-import Testimonials from "@/components/Testimonials";
-import Contact from "@/components/Contact";
-import { getHomepagePage, getServices, getProjects, getTestimonials, getHeader, getFooter } from "@/lib/payload";
+import { getPageBySlug, getAllPages, getServices, getProjects, getTestimonials, getHeader, getFooter } from "@/lib/payload";
+
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
 
 interface PayloadDoc {
   id: string | number;
   [key: string]: unknown;
+}
+
+// Generate static params for SSG
+export async function generateStaticParams() {
+  try {
+    const pages = await getAllPages();
+    return pages
+      .filter((page) => !page.isHomepage) // Exclude homepage
+      .map((page) => ({
+        slug: String(page.slug),
+      }));
+  } catch {
+    return [];
+  }
+}
+
+// Generate metadata for SEO
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  
+  try {
+    const page = await getPageBySlug(slug);
+    if (!page) return {};
+
+    return {
+      title: (page.metaTitle as string) || (page.title as string),
+      description: page.metaDescription as string,
+      openGraph: {
+        title: (page.metaTitle as string) || (page.title as string),
+        description: page.metaDescription as string,
+      },
+      robots: page.noIndex ? { index: false, follow: false } : undefined,
+    };
+  } catch {
+    return {};
+  }
 }
 
 function transformServices(docs: PayloadDoc[]) {
@@ -46,12 +82,14 @@ function transformTestimonials(docs: PayloadDoc[]) {
   }));
 }
 
-export default async function Home() {
+export default async function Page({ params }: PageProps) {
+  const { slug } = await params;
+  
   let page, services, projects, testimonials, header, footer;
 
   try {
     const [pageData, servicesData, projectsData, testimonialsData, headerData, footerData] = await Promise.all([
-      getHomepagePage().catch(() => null),
+      getPageBySlug(slug),
       getServices().catch(() => []),
       getProjects(true).catch(() => []),
       getTestimonials(true).catch(() => []),
@@ -66,38 +104,30 @@ export default async function Home() {
     header = headerData;
     footer = footerData;
   } catch {
-    console.log("Using default content - CMS data not available");
+    notFound();
   }
 
-  // If there's a homepage with blocks, render using BlockRenderer
-  if (page && Array.isArray(page.layout) && page.layout.length > 0) {
-    return (
-      <>
-        <Header {...header as any} />
-        <main id="main-content" role="main">
+  if (!page) {
+    notFound();
+  }
+
+  return (
+    <>
+      <Header {...header as any} />
+      <main id="main-content" role="main">
+        {Array.isArray(page.layout) && page.layout.length > 0 ? (
           <BlockRenderer
             blocks={page.layout as never}
             services={services}
             projects={projects}
             testimonials={testimonials}
           />
-        </main>
-        <Footer {...footer as any} />
-      </>
-    );
-  }
-
-  // Fallback: Render default homepage with static components
-  return (
-    <>
-      <Header {...header as any} />
-      <main id="main-content" role="main">
-        <Hero />
-        <Services services={services} />
-        <Portfolio projects={projects} />
-        <About />
-        <Testimonials testimonials={testimonials} />
-        <Contact />
+        ) : (
+          <div className="section container">
+            <h1 className="section-title">{String(page.title)}</h1>
+            <p className="text-pilow-slate">This page has no content blocks yet.</p>
+          </div>
+        )}
       </main>
       <Footer {...footer as any} />
     </>

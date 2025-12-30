@@ -1,17 +1,27 @@
 {
-  "name": "temp-pilow",
+  "name": "pilow",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "payload:generate": "payload generate:types"
   },
   "dependencies": {
-    "next": "16.1.1",
-    "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "@heroicons/react": "^2.2.0",
+    "@payloadcms/db-sqlite": "^3.69.0",
+    "@payloadcms/live-preview-react": "^3.69.0",
+    "@payloadcms/next": "^3.69.0",
+    "@payloadcms/richtext-lexical": "^3.69.0",
+    "framer-motion": "^12.23.26",
+    "graphql": "^16.12.0",
+    "next": "^15.5.9",
+    "payload": "^3.69.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

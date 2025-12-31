@@ -132,7 +132,22 @@ export async function getHeader() {
   const payload = await getPayloadClient();
   const header = await payload.findGlobal({
     slug: "header",
+    depth: 2, // Populate relations like logo
   });
+  
+  // Transform logo to include url from media relation
+  if (header.logo && typeof header.logo === 'object' && 'url' in header.logo) {
+    return {
+      ...header,
+      logo: {
+        url: header.logo.url,
+        alt: header.logo.alt || 'Logo',
+        width: header.logo.width,
+        height: header.logo.height,
+      }
+    };
+  }
+  
   return header;
 }
 
@@ -141,7 +156,22 @@ export async function getFooter() {
   const payload = await getPayloadClient();
   const footer = await payload.findGlobal({
     slug: "footer",
+    depth: 2, // Populate relations like logo
   });
+  
+  // Transform logo to include url from media relation
+  if (footer.logo && typeof footer.logo === 'object' && 'url' in footer.logo) {
+    return {
+      ...footer,
+      logo: {
+        url: footer.logo.url,
+        alt: footer.logo.alt || 'Logo',
+        width: footer.logo.width,
+        height: footer.logo.height,
+      }
+    };
+  }
+  
   return footer;
 }
 

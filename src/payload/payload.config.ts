@@ -1,8 +1,10 @@
 import { buildConfig } from "payload";
 import { sqliteAdapter } from "@payloadcms/db-sqlite";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 import path from "path";
 import { fileURLToPath } from "url";
+import sharp from "sharp";
 
 // Collections
 import { Users } from "./collections/Users";
@@ -20,6 +22,18 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export default buildConfig({
+  // Pass sharp for image processing
+  sharp,
+  // Storage adapter for Vercel deployments (requires BLOB_READ_WRITE_TOKEN env var)
+  plugins: [
+    vercelBlobStorage({
+      enabled: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
+      collections: {
+        media: true,
+      },
+      token: process.env.BLOB_READ_WRITE_TOKEN || "",
+    }),
+  ],
   admin: {
     user: Users.slug,
     importMap: {

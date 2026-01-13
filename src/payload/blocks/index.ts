@@ -11,29 +11,33 @@ export const HeroBlock: Block = {
       name: "badge",
       type: "text",
       defaultValue: "Web Development Excellence",
+      localized: true,
     },
     {
       name: "headline",
       type: "text",
       required: true,
       defaultValue: "We Craft Digital Experiences That Inspire",
+      localized: true,
     },
     {
       name: "highlightedText",
       type: "text",
       label: "Highlighted Text (gradient)",
       defaultValue: "Digital Experiences",
+      localized: true,
     },
     {
       name: "description",
       type: "textarea",
       required: true,
+      localized: true,
     },
     {
       name: "primaryButton",
       type: "group",
       fields: [
-        { name: "text", type: "text", defaultValue: "Start Your Project" },
+        { name: "text", type: "text", defaultValue: "Start Your Project", localized: true },
         { name: "link", type: "text", defaultValue: "#contact" },
       ],
     },
@@ -41,7 +45,7 @@ export const HeroBlock: Block = {
       name: "secondaryButton",
       type: "group",
       fields: [
-        { name: "text", type: "text", defaultValue: "View Our Work" },
+        { name: "text", type: "text", defaultValue: "View Our Work", localized: true },
         { name: "link", type: "text", defaultValue: "#portfolio" },
       ],
     },
@@ -52,7 +56,7 @@ export const HeroBlock: Block = {
       maxRows: 4,
       fields: [
         { name: "value", type: "text", required: true },
-        { name: "label", type: "text", required: true },
+        { name: "label", type: "text", required: true, localized: true },
       ],
     },
     {
@@ -71,10 +75,10 @@ export const ServicesBlock: Block = {
     plural: "Services Sections",
   },
   fields: [
-    { name: "badge", type: "text", defaultValue: "What We Do" },
-    { name: "headline", type: "text", defaultValue: "Services That Drive Results" },
-    { name: "highlightedText", type: "text", defaultValue: "Results" },
-    { name: "description", type: "textarea" },
+    { name: "badge", type: "text", defaultValue: "What We Do", localized: true },
+    { name: "headline", type: "text", defaultValue: "Services That Drive Results", localized: true },
+    { name: "highlightedText", type: "text", defaultValue: "Results", localized: true },
+    { name: "description", type: "textarea", localized: true },
     {
       name: "source",
       type: "select",
@@ -91,8 +95,8 @@ export const ServicesBlock: Block = {
         condition: (_, siblingData) => siblingData?.source === "custom",
       },
       fields: [
-        { name: "title", type: "text", required: true },
-        { name: "description", type: "textarea", required: true },
+        { name: "title", type: "text", required: true, localized: true },
+        { name: "description", type: "textarea", required: true, localized: true },
         {
           name: "icon",
           type: "select",
@@ -108,7 +112,7 @@ export const ServicesBlock: Block = {
         {
           name: "features",
           type: "array",
-          fields: [{ name: "feature", type: "text" }],
+          fields: [{ name: "feature", type: "text", localized: true }],
         },
       ],
     },
@@ -122,10 +126,10 @@ export const PortfolioBlock: Block = {
     plural: "Portfolio Sections",
   },
   fields: [
-    { name: "badge", type: "text", defaultValue: "Our Work" },
-    { name: "headline", type: "text", defaultValue: "Featured Projects" },
-    { name: "highlightedText", type: "text", defaultValue: "Projects" },
-    { name: "description", type: "textarea" },
+    { name: "badge", type: "text", defaultValue: "Our Work", localized: true },
+    { name: "headline", type: "text", defaultValue: "Featured Projects", localized: true },
+    { name: "highlightedText", type: "text", defaultValue: "Projects", localized: true },
+    { name: "description", type: "textarea", localized: true },
     {
       name: "showFilters",
       type: "checkbox",
@@ -154,17 +158,17 @@ export const AboutBlock: Block = {
     plural: "About Sections",
   },
   fields: [
-    { name: "badge", type: "text", defaultValue: "About Us" },
-    { name: "headline", type: "text", defaultValue: "Passionate About Building the Future of Web" },
-    { name: "highlightedText", type: "text", defaultValue: "Future of Web" },
-    { name: "content", type: "richText" },
+    { name: "badge", type: "text", defaultValue: "About Us", localized: true },
+    { name: "headline", type: "text", defaultValue: "Passionate About Building the Future of Web", localized: true },
+    { name: "highlightedText", type: "text", defaultValue: "Future of Web", localized: true },
+    { name: "content", type: "richText", localized: true },
     {
       name: "values",
       type: "array",
       label: "Company Values",
       fields: [
-        { name: "title", type: "text", required: true },
-        { name: "description", type: "text", required: true },
+        { name: "title", type: "text", required: true, localized: true },
+        { name: "description", type: "text", required: true, localized: true },
         {
           name: "icon",
           type: "select",
@@ -183,7 +187,7 @@ export const AboutBlock: Block = {
       label: "Statistics",
       fields: [
         { name: "value", type: "text", required: true },
-        { name: "label", type: "text", required: true },
+        { name: "label", type: "text", required: true, localized: true },
       ],
     },
   ],
@@ -196,10 +200,10 @@ export const TestimonialsBlock: Block = {
     plural: "Testimonials Sections",
   },
   fields: [
-    { name: "badge", type: "text", defaultValue: "Testimonials" },
-    { name: "headline", type: "text", defaultValue: "What Our Clients Say" },
-    { name: "highlightedText", type: "text", defaultValue: "Clients" },
-    { name: "description", type: "textarea" },
+    { name: "badge", type: "text", defaultValue: "Testimonials", localized: true },
+    { name: "headline", type: "text", defaultValue: "What Our Clients Say", localized: true },
+    { name: "highlightedText", type: "text", defaultValue: "Clients", localized: true },
+    { name: "description", type: "textarea", localized: true },
     {
       name: "source",
       type: "select",
@@ -228,12 +232,12 @@ export const ContactBlock: Block = {
     plural: "Contact Sections",
   },
   fields: [
-    { name: "badge", type: "text", defaultValue: "Get in Touch" },
-    { name: "headline", type: "text", defaultValue: "Ready to Start Your Project?" },
-    { name: "highlightedText", type: "text", defaultValue: "Project" },
-    { name: "description", type: "textarea" },
-    { name: "formTitle", type: "text", defaultValue: "Let's Build Something Amazing" },
-    { name: "formDescription", type: "textarea" },
+    { name: "badge", type: "text", defaultValue: "Get in Touch", localized: true },
+    { name: "headline", type: "text", defaultValue: "Ready to Start Your Project?", localized: true },
+    { name: "highlightedText", type: "text", defaultValue: "Project", localized: true },
+    { name: "description", type: "textarea", localized: true },
+    { name: "formTitle", type: "text", defaultValue: "Let's Build Something Amazing", localized: true },
+    { name: "formDescription", type: "textarea", localized: true },
     {
       name: "showContactInfo",
       type: "checkbox",
@@ -250,8 +254,8 @@ export const ContentBlock: Block = {
     plural: "Content Blocks",
   },
   fields: [
-    { name: "heading", type: "text" },
-    { name: "content", type: "richText" },
+    { name: "heading", type: "text", localized: true },
+    { name: "content", type: "richText", localized: true },
     {
       name: "backgroundColor",
       type: "select",
@@ -272,13 +276,13 @@ export const CTABlock: Block = {
     plural: "Calls to Action",
   },
   fields: [
-    { name: "headline", type: "text", required: true },
-    { name: "description", type: "textarea" },
+    { name: "headline", type: "text", required: true, localized: true },
+    { name: "description", type: "textarea", localized: true },
     {
       name: "button",
       type: "group",
       fields: [
-        { name: "text", type: "text", defaultValue: "Get Started" },
+        { name: "text", type: "text", defaultValue: "Get Started", localized: true },
         { name: "link", type: "text", defaultValue: "/contact" },
       ],
     },

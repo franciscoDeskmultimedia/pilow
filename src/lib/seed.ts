@@ -199,11 +199,40 @@ export async function seed(payload: Payload) {
 
         const slug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
         
+        // Check if project with this slug already exists
+        const existingProject = await payload.find({
+            collection: 'projects',
+            where: { slug: { equals: slug } },
+            locale: 'en',
+        });
+        
+        if (existingProject.docs.length > 0) {
+            const doc = existingProject.docs[0];
+            // Update existing project to ensure English content exists
+            if (!doc.title) {
+                 const { imageFile: _, ...projectData } = project; // eslint-disable-line @typescript-eslint/no-unused-vars
+                 await payload.update({
+                    collection: 'projects',
+                    id: doc.id,
+                    data: {
+                        ...projectData,
+                        _status: 'published',
+                    },
+                    locale: 'en',
+                });
+                console.log(`Updated project content: ${project.title}`);
+            } else {
+                console.log(`Project already exists: ${project.title}`);
+            }
+            continue;
+        }
+        
         // Remove imageFile from spread
         const { imageFile: _, ...projectData } = project; // eslint-disable-line @typescript-eslint/no-unused-vars
 
         await payload.create({
             collection: 'projects',
+            locale: 'en', // Create in English locale
             data: {
                 ...projectData,
                 slug,
@@ -220,72 +249,103 @@ export async function seed(payload: Payload) {
   for (const testimonial of defaultTestimonials) {
     const existing = await payload.find({
         collection: 'testimonials',
-        where: { author: { equals: testimonial.author } }
+        where: { author: { equals: testimonial.author } },
+        locale: 'en',
     });
     
     if (existing.docs.length === 0) {
         await payload.create({
             collection: 'testimonials',
             data: { ...testimonial },
+            locale: 'en',
         });
         console.log(`Created testimonial: ${testimonial.author}`);
+    } else {
+        // Update existing testimonial to ensure English content exists
+        const doc = existing.docs[0];
+        if (!doc.content) {
+            await payload.update({
+                collection: 'testimonials',
+                id: doc.id,
+                data: { ...testimonial },
+                locale: 'en',
+            });
+            console.log(`Updated testimonial content: ${testimonial.author}`);
+        }
     }
   }
 
   // 4. Seed Homepage
   const existingHome = await payload.find({
       collection: 'pages',
-      where: { slug: { equals: 'home' } }
+      where: { slug: { equals: 'home' } },
+      locale: 'en',
   });
+
+  const homePageData = {
+      title: 'Home',
+      slug: 'home',
+      isHomepage: true,
+      status: 'published',
+      layout: [
+          { blockType: 'hero', ...heroData },
+          {
+              blockType: 'services',
+              source: 'custom',
+              customServices: defaultServices,
+              badge: "What We Do",
+              headline: "Services That Drive Results",
+              highlightedText: "Results",
+          },
+          {
+              blockType: 'portfolio',
+              showFilters: true,
+              featuredOnly: true,
+              maxItems: 6,
+              badge: "Our Work",
+              headline: "Featured Projects",
+              highlightedText: "Projects",
+          },
+          { blockType: 'about', ...aboutData },
+          {
+              blockType: 'testimonials',
+              source: 'collection',
+              featuredOnly: true,
+              badge: "Testimonials",
+              headline: "What Our Clients Say",
+              highlightedText: "Clients",
+          },
+          {
+              blockType: 'contact',
+              badge: "Get in Touch",
+              headline: "Ready to Start Your Project?",
+              highlightedText: "Project",
+              formTitle: "Let's Build Something Amazing",
+              showContactInfo: true,
+          }
+      ]
+  };
 
   if (existingHome.docs.length === 0) {
       await payload.create({
           collection: 'pages',
-          data: {
-              title: 'Home',
-              slug: 'home',
-              isHomepage: true,
-              status: 'published',
-              layout: [
-                  { blockType: 'hero', ...heroData },
-                  {
-                      blockType: 'services',
-                      source: 'custom',
-                      customServices: defaultServices,
-                      badge: "What We Do",
-                      headline: "Services That Drive Results",
-                      highlightedText: "Results",
-                  },
-                  {
-                      blockType: 'portfolio',
-                      showFilters: true,
-                      featuredOnly: true,
-                      maxItems: 6,
-                      badge: "Our Work",
-                      headline: "Featured Projects",
-                      highlightedText: "Projects",
-                  },
-                  { blockType: 'about', ...aboutData },
-                  {
-                      blockType: 'testimonials',
-                      source: 'collection',
-                      featuredOnly: true,
-                      badge: "Testimonials",
-                      headline: "What Our Clients Say",
-                      highlightedText: "Clients",
-                  },
-                  {
-                      blockType: 'contact',
-                      badge: "Get in Touch",
-                      headline: "Ready to Start Your Project?",
-                      highlightedText: "Project",
-                      formTitle: "Let's Build Something Amazing",
-                      showContactInfo: true,
-                  }
-              ]
-          }
+          data: homePageData,
+          locale: 'en',
       });
       console.log('Created Homepage');
+  } else {
+      // Check if layout is empty/broken and repair it
+      const home = existingHome.docs[0];
+      if (!home.layout || (Array.isArray(home.layout) && home.layout.length === 0)) {
+          console.log('Reparing broken homepage layout...');
+          await payload.update({
+              collection: 'pages',
+              id: home.id,
+              data: homePageData,
+              locale: 'en',
+          });
+          console.log('Homepage repaired');
+      }
   }
 
   // 5. Seed Globals

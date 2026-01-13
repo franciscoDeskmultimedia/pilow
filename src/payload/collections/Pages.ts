@@ -8,9 +8,22 @@ export const Pages: CollectionConfig = {
     group: "Content",
     defaultColumns: ["title", "slug", "isHomepage", "status", "updatedAt"],
     livePreview: {
-      url: ({ data }) => {
+      url: ({ data, locale }) => {
+        let localeCode = 'en';
+        if (typeof locale === 'string') {
+          localeCode = locale;
+        } else if (locale && typeof locale === 'object' && 'code' in locale) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          localeCode = (locale as any).code;
+        }
+
         const path = data?.isHomepage ? "/" : `/${data?.slug || ""}`;
-        return `${process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:3000"}/api/draft?url=${path}&secret=${process.env.PAYLOAD_SECRET}`;
+        
+        // Force explicit locale to avoid ambiguity
+        const fullPath = `/${localeCode}${path === '/' ? '' : path}`;
+        
+        // Use relative URL to avoid port mismatches during dev
+        return `/api/draft?url=${encodeURIComponent(fullPath)}&secret=${process.env.PAYLOAD_SECRET}`;
       },
     },
   },
@@ -31,12 +44,15 @@ export const Pages: CollectionConfig = {
               name: "title",
               type: "text",
               required: true,
+              localized: true, // 🌍 Different title per language
             },
             {
               name: "layout",
               type: "blocks",
               label: "Page Builder",
               blocks: pageBlocks,
+              // NOTE: layout is NOT localized - same blocks for all languages
+              // Text content within blocks IS localized
               admin: {
                 description: "Add and arrange sections to build your page",
               },

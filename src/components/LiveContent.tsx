@@ -22,7 +22,7 @@ export default function LiveContent({
 }: LiveContentProps) {
   const { data } = useLivePreview({
     initialData: page,
-    serverURL: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
+    serverURL: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3001",
     depth: 2,
   });
 

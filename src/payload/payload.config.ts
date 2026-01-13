@@ -86,8 +86,16 @@ export default buildConfig({
   globals: [Settings, Header, Footer],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "pilow-dev-secret-change-in-production",
-  cors: [process.env.NEXT_PUBLIC_SERVER_URL || ''].filter(Boolean),
-  csrf: [process.env.NEXT_PUBLIC_SERVER_URL || ''].filter(Boolean),
+  cors: [
+    process.env.NEXT_PUBLIC_SERVER_URL || '', 
+    'http://localhost:3000', 
+    'http://localhost:3001'
+  ].filter(Boolean),
+  csrf: [
+    process.env.NEXT_PUBLIC_SERVER_URL || '', 
+    'http://localhost:3000', 
+    'http://localhost:3001'
+  ].filter(Boolean),
   typescript: {
     outputFile: path.resolve(dirname, "payload-types.ts"),
   },

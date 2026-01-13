@@ -15,11 +15,13 @@ export const Services: CollectionConfig = {
       name: "title",
       type: "text",
       required: true,
+      localized: true, // 🌍 Different title per language
     },
     {
       name: "description",
       type: "textarea",
       required: true,
+      localized: true, // 🌍 Different description per language
     },
     {
       name: "icon",
@@ -36,11 +38,13 @@ export const Services: CollectionConfig = {
         { label: "Cloud", value: "cloud" },
       ],
       defaultValue: "code",
+      // Icon is NOT localized - same icon for all languages
     },
     {
       name: "features",
       type: "array",
       label: "Features",
+      localized: true, // 🌍 Different features per language
       minRows: 1,
       maxRows: 6,
       fields: [

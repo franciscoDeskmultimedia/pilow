@@ -39,10 +39,7 @@ const nextConfig: NextConfig = {
       {
         source: "/(.*)",
         headers: [
-          {
-            key: "X-Frame-Options",
-            value: "SAMEORIGIN",
-          },
+          // X-Frame-Options removed to allow Live Preview iframes
           {
             key: "X-Content-Type-Options",
             value: "nosniff",

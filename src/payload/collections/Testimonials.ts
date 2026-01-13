@@ -16,23 +16,27 @@ export const Testimonials: CollectionConfig = {
       type: "textarea",
       required: true,
       label: "Testimonial Content",
+      localized: true, // 🌍 Different testimonial text per language
     },
     {
       name: "author",
       type: "text",
       required: true,
       label: "Author Name",
+      // Author name is NOT localized - same name in all languages
     },
     {
       name: "role",
       type: "text",
       required: true,
       label: "Author Role/Title",
+      localized: true, // 🌍 Role/title can be translated
     },
     {
       name: "company",
       type: "text",
       required: true,
+      // Company name is NOT localized
     },
     {
       name: "avatar",

@@ -8,10 +8,17 @@ export const Projects: CollectionConfig = {
     defaultColumns: ["title", "category", "featured", "updatedAt"],
     livePreview: {
       url: ({ data, locale }) => {
+        let localeCode = 'en';
+        if (typeof locale === 'string') {
+          localeCode = locale;
+        } else if (locale && typeof locale === 'object' && 'code' in locale) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          localeCode = (locale as any).code;
+        }
+
         const path = data?.slug ? `projects/${data.slug}` : 'projects';
-        const localeStr = String(locale);
-        const localePrefix = localeStr === 'en' ? '' : `/${localeStr}`;
-        return `${process.env.NEXT_PUBLIC_APP_URL || ''}${localePrefix}/${path}`;
+        const fullPath = `/${localeCode}/${path}`;
+        return `/api/draft?url=${encodeURIComponent(fullPath)}&secret=${process.env.PAYLOAD_SECRET}`;
       },
     },
   },

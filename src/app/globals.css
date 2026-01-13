@@ -60,10 +60,21 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0f1419;
-    --foreground: #f0f4f8;
+    --foreground: #f0f4f8; /* Brighter white for main text */
     --muted: #1a2332;
-    --muted-foreground: #9ca3af;
+    --muted-foreground: #cbd5e1; /* Lighter gray for secondary text */
+    --pilow-slate: #94a3b8; /* Lighten slate in dark mode */
+    --pilow-slate-dark: #cbd5e1; /* Make dark slate light in dark mode */
   }
+}
+/* Manual Dark Mode Class */
+.dark {
+  --background: #0f1419;
+  --foreground: #f0f4f8;
+  --muted: #1a2332;
+  --muted-foreground: #cbd5e1;
+  --pilow-slate: #94a3b8;
+  --pilow-slate-dark: #cbd5e1;
 }
 
 /* Base Styles */

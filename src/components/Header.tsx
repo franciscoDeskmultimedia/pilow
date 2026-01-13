@@ -62,6 +62,32 @@ export default function Header({ logo, navItems }: HeaderProps) {
     };
   }, [isMobileMenuOpen]);
 
+  // Initialize theme from localStorage or system preference
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    // Check initial preference
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      setIsDark(true);
+      document.documentElement.classList.add('dark');
+    } else {
+      setIsDark(false);
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    if (isDark) {
+      document.documentElement.classList.remove('dark');
+      localStorage.theme = 'light';
+      setIsDark(false);
+    } else {
+      document.documentElement.classList.add('dark');
+      localStorage.theme = 'dark';
+      setIsDark(true);
+    }
+  };
+
   const links = navItems?.map((item) => {
     let href = item.link.url || "#";
     if (item.link.type === "reference" && item.link.reference?.slug) {
@@ -69,6 +95,8 @@ export default function Header({ logo, navItems }: HeaderProps) {
     }
     return { href, label: item.link.label };
   }) || defaultNavLinks;
+
+
 
   return (
     <header
@@ -113,48 +141,83 @@ export default function Header({ logo, navItems }: HeaderProps) {
         <ul className="hidden md:flex items-center gap-8">
           {links.map((link) => (
             <li key={link.label}>
-              <Link
+              <a
                 href={link.href}
-                className="text-sm font-medium text-pilow-slate hover:text-pilow-ocean transition-colors relative group"
+                className="text-sm font-medium text-pilow-slate hover:text-pilow-ocean transition-colors relative group dark:text-gray-300 dark:hover:text-pilow-cyan"
               >
                 {link.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-pilow-ocean transition-all duration-300 group-hover:w-full" />
-              </Link>
+              </a>
             </li>
           ))}
           <li>
-            <Link href="#contact" className="btn-primary text-sm py-3 px-6">
+            <button
+              onClick={toggleTheme}
+              className={`p-2 rounded-full transition-all duration-200 ${isScrolled ? 'bg-gray-100 dark:bg-gray-800' : 'bg-white/10 backdrop-blur-sm'}`}
+              aria-label="Toggle Dark Mode"
+            >
+              {isDark ? (
+                <svg className="w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5 text-pilow-slate-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+              )}
+            </button>
+          </li>
+          <li>
+            <a href="#contact" className="btn-primary text-sm py-3 px-6">
               Get in Touch
-            </Link>
+            </a>
           </li>
         </ul>
 
-        {/* Mobile Menu Button */}
-        <button
-          className="md:hidden z-50 p-2 -mr-2"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-expanded={isMobileMenuOpen}
-          aria-controls="mobile-menu"
-          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-        >
-          <div className="w-6 h-5 relative flex flex-col justify-between">
-            <span
-              className={`w-full h-0.5 bg-pilow-slate transition-all duration-300 origin-left ${
-                isMobileMenuOpen ? "rotate-45 translate-x-0.5" : ""
-              }`}
-            />
-            <span
-              className={`w-full h-0.5 bg-pilow-slate transition-all duration-300 ${
-                isMobileMenuOpen ? "opacity-0 translate-x-3" : ""
-              }`}
-            />
-            <span
-              className={`w-full h-0.5 bg-pilow-slate transition-all duration-300 origin-left ${
-                isMobileMenuOpen ? "-rotate-45 translate-x-0.5" : ""
-              }`}
-            />
-          </div>
-        </button>
+        {/* Mobile Menu Button - Flex Container */}
+        <div className="md:hidden flex items-center gap-4 z-50">
+          <button
+              onClick={toggleTheme}
+              className={`p-2 rounded-full transition-all duration-200 ${isScrolled ? 'bg-gray-100 dark:bg-gray-800' : 'bg-white/10 backdrop-blur-sm'}`}
+              aria-label="Toggle Dark Mode"
+            >
+              {isDark ? (
+                <svg className="w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5 text-pilow-slate-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+              )}
+            </button>
+          
+          <button
+            className="p-2 -mr-2"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+          >
+            <div className="w-6 h-5 relative flex flex-col justify-between">
+              <span
+                className={`w-full h-0.5 bg-pilow-slate dark:bg-white transition-all duration-300 origin-left ${
+                  isMobileMenuOpen ? "rotate-45 translate-x-0.5" : ""
+                }`}
+              />
+              <span
+                className={`w-full h-0.5 bg-pilow-slate dark:bg-white transition-all duration-300 ${
+                  isMobileMenuOpen ? "opacity-0 translate-x-3" : ""
+                }`}
+              />
+              <span
+                className={`w-full h-0.5 bg-pilow-slate dark:bg-white transition-all duration-300 origin-left ${
+                  isMobileMenuOpen ? "-rotate-45 translate-x-0.5" : ""
+                }`}
+              />
+            </div>
+          </button>
+        </div>
 
         {/* Mobile Menu */}
         <AnimatePresence>
@@ -184,13 +247,13 @@ export default function Header({ logo, navItems }: HeaderProps) {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 + index * 0.05 }}
                   >
-                    <Link
+                    <a
                       href={link.href}
-                      className="text-2xl font-medium text-pilow-slate hover:text-pilow-ocean transition-colors"
+                      className="text-2xl font-medium text-pilow-slate dark:text-gray-200 hover:text-pilow-ocean transition-colors"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {link.label}
-                    </Link>
+                    </a>
                   </motion.li>
                 ))}
                 <motion.li
@@ -198,13 +261,13 @@ export default function Header({ logo, navItems }: HeaderProps) {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.35 }}
                 >
-                  <Link
+                  <a
                     href="#contact"
                     className="btn-primary text-lg"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Get in Touch
-                  </Link>
+                  </a>
                 </motion.li>
               </motion.ul>
             </motion.div>

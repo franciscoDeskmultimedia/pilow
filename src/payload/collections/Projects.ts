@@ -7,9 +7,10 @@ export const Projects: CollectionConfig = {
     group: "Content",
     defaultColumns: ["title", "category", "featured", "updatedAt"],
     livePreview: {
-      url: ({ data }) => {
+      url: ({ data, locale }) => {
         const path = data?.slug ? `projects/${data.slug}` : 'projects';
-        return `${process.env.NEXT_PUBLIC_APP_URL || ''}/${path}`;
+        const localePrefix = locale === 'en' ? '' : `/${locale}`;
+        return `${process.env.NEXT_PUBLIC_APP_URL || ''}${localePrefix}/${path}`;
       },
     },
   },
@@ -24,6 +25,7 @@ export const Projects: CollectionConfig = {
       name: "title",
       type: "text",
       required: true,
+      localized: true, // 🌍 This field can have different values per language
     },
     {
       name: "slug",
@@ -33,6 +35,7 @@ export const Projects: CollectionConfig = {
       admin: {
         position: "sidebar",
       },
+      // Note: slug is NOT localized - same URL for all languages
     },
     {
       name: "category",
@@ -47,22 +50,26 @@ export const Projects: CollectionConfig = {
         { label: "Energy", value: "energy" },
         { label: "Other", value: "other" },
       ],
+      // Note: category is NOT localized - same selection for all languages
     },
     {
       name: "description",
       type: "textarea",
       required: true,
+      localized: true, // 🌍 Different description per language
     },
     {
       name: "fullDescription",
       type: "richText",
       label: "Full Description",
+      localized: true, // 🌍 Different rich text content per language
     },
     {
       name: "featuredImage",
       type: "upload",
       relationTo: "media",
       required: true,
+      // Note: Images are NOT localized - same image for all languages
     },
     {
       name: "gallery",
@@ -81,6 +88,7 @@ export const Projects: CollectionConfig = {
       name: "tags",
       type: "array",
       label: "Technologies Used",
+      localized: true, // 🌍 Tags can be localized if needed
       fields: [
         {
           name: "tag",
@@ -93,6 +101,7 @@ export const Projects: CollectionConfig = {
       name: "projectUrl",
       type: "text",
       label: "Live Project URL",
+      // Note: URL is NOT localized - same link for all languages
     },
     {
       name: "featured",

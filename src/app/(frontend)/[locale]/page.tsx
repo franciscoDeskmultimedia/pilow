@@ -8,6 +8,8 @@ import About from "@/components/About";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import { getHomepagePage, getServices, getProjects, getTestimonials, getHeader, getFooter } from "@/lib/payload";
+import { setRequestLocale } from 'next-intl/server';
+import { routing } from '@/i18n/routing';
 
 interface PayloadDoc {
   id: string | number;
@@ -46,17 +48,35 @@ function transformTestimonials(docs: PayloadDoc[]) {
   }));
 }
 
-export default async function Home() {
+// Generate static params for all locales
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export default async function Home({ params }: Props) {
+  const { locale } = await params;
+  
+  // Cast locale to the expected type
+  const payloadLocale = locale as 'en' | 'es';
+  
+  // Enable static rendering
+  setRequestLocale(locale);
+  
   let page, services, projects, testimonials, header, footer;
 
   try {
+    // Fetch all data with the current locale
     const [pageData, servicesData, projectsData, testimonialsData, headerData, footerData] = await Promise.all([
-      getHomepagePage().catch(() => null),
-      getServices().catch(() => []),
-      getProjects(true).catch(() => []),
-      getTestimonials(true).catch(() => []),
-      getHeader().catch(() => null),
-      getFooter().catch(() => null),
+      getHomepagePage(payloadLocale).catch(() => null),
+      getServices(payloadLocale).catch(() => []),
+      getProjects(true, payloadLocale).catch(() => []),
+      getTestimonials(true, payloadLocale).catch(() => []),
+      getHeader(payloadLocale).catch(() => null),
+      getFooter(payloadLocale).catch(() => null),
     ]);
     
     page = pageData;

@@ -24,6 +24,26 @@ const dirname = path.dirname(filename);
 export default buildConfig({
   // Pass sharp for image processing
   sharp,
+  
+  // ============================================
+  // LOCALIZATION CONFIGURATION
+  // ============================================
+  // This enables multi-language content in the CMS
+  localization: {
+    locales: [
+      {
+        label: 'English',
+        code: 'en',
+      },
+      {
+        label: 'Español',
+        code: 'es',
+      },
+    ],
+    defaultLocale: 'en',
+    fallback: true, // If content doesn't exist in requested locale, fall back to default
+  },
+  
   // Storage adapter for Vercel deployments (requires BLOB_READ_WRITE_TOKEN env var)
   plugins: [
     vercelBlobStorage({

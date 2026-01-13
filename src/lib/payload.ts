@@ -2,6 +2,9 @@ import { getPayload, Where } from "payload";
 import config from "@payload-config";
 import { draftMode } from "next/headers";
 
+// Type for supported locales
+type Locale = 'en' | 'es';
+
 export const getPayloadClient = async () => {
   const payload = await getPayload({
     config,
@@ -9,11 +12,12 @@ export const getPayloadClient = async () => {
   return payload;
 };
 
-// Helper to get services
-export async function getServices() {
+// Helper to get services (with locale support)
+export async function getServices(locale: Locale = 'en') {
   const payload = await getPayloadClient();
   const services = await payload.find({
     collection: "services",
+    locale, // 🌍 Fetch content in the specified language
     where: {
       isActive: {
         equals: true,
@@ -25,14 +29,15 @@ export async function getServices() {
   return services.docs;
 }
 
-// Helper to get projects
-export async function getProjects(featured?: boolean) {
+// Helper to get projects (with locale support)
+export async function getProjects(featured?: boolean, locale: Locale = 'en') {
   const payload = await getPayloadClient();
   
   const where: Where = featured ? { featured: { equals: true } } : {};
   
   const projects = await payload.find({
     collection: "projects",
+    locale, // 🌍 Fetch content in the specified language
     where,
     sort: "order",
     limit: 100,
@@ -40,14 +45,15 @@ export async function getProjects(featured?: boolean) {
   return projects.docs;
 }
 
-// Helper to get testimonials
-export async function getTestimonials(featured?: boolean) {
+// Helper to get testimonials (with locale support)
+export async function getTestimonials(featured?: boolean, locale: Locale = 'en') {
   const payload = await getPayloadClient();
   
   const where: Where = featured ? { featured: { equals: true } } : {};
   
   const testimonials = await payload.find({
     collection: "testimonials",
+    locale, // 🌍 Fetch content in the specified language
     where,
     sort: "order",
     limit: 100,
@@ -55,12 +61,13 @@ export async function getTestimonials(featured?: boolean) {
   return testimonials.docs;
 }
 
-// Helper to get page by slug
-export async function getPageBySlug(slug: string) {
+// Helper to get page by slug (with locale support)
+export async function getPageBySlug(slug: string, locale: Locale = 'en') {
   const { isEnabled: isDraftMode } = await draftMode();
   const payload = await getPayloadClient();
   const pages = await payload.find({
     collection: "pages",
+    locale, // 🌍 Fetch content in the specified language
     draft: isDraftMode,
     where: {
       slug: {
@@ -79,12 +86,13 @@ export async function getPageBySlug(slug: string) {
   return pages.docs[0] || null;
 }
 
-// Helper to get the homepage (page with isHomepage: true)
-export async function getHomepagePage() {
+// Helper to get the homepage (with locale support)
+export async function getHomepagePage(locale: Locale = 'en') {
   const { isEnabled: isDraftMode } = await draftMode();
   const payload = await getPayloadClient();
   const pages = await payload.find({
     collection: "pages",
+    locale, // 🌍 Fetch content in the specified language
     draft: isDraftMode,
     where: {
       isHomepage: {
@@ -103,11 +111,12 @@ export async function getHomepagePage() {
   return pages.docs[0] || null;
 }
 
-// Helper to get all published pages (for sitemap/navigation)
-export async function getAllPages() {
+// Helper to get all published pages
+export async function getAllPages(locale: Locale = 'en') {
   const payload = await getPayloadClient();
   const pages = await payload.find({
     collection: "pages",
+    locale,
     where: {
       status: {
         equals: "published",
@@ -118,20 +127,22 @@ export async function getAllPages() {
   return pages.docs;
 }
 
-// Helper to get global settings
-export async function getSettings() {
+// Helper to get global settings (with locale support)
+export async function getSettings(locale: Locale = 'en') {
   const payload = await getPayloadClient();
   const settings = await payload.findGlobal({
     slug: "settings",
+    locale,
   });
   return settings;
 }
 
-// Helper to get header global
-export async function getHeader() {
+// Helper to get header global (with locale support)
+export async function getHeader(locale: Locale = 'en') {
   const payload = await getPayloadClient();
   const header = await payload.findGlobal({
     slug: "header",
+    locale,
     depth: 2, // Populate relations like logo
   });
   
@@ -151,11 +162,12 @@ export async function getHeader() {
   return header;
 }
 
-// Helper to get footer global
-export async function getFooter() {
+// Helper to get footer global (with locale support)
+export async function getFooter(locale: Locale = 'en') {
   const payload = await getPayloadClient();
   const footer = await payload.findGlobal({
     slug: "footer",
+    locale,
     depth: 2, // Populate relations like logo
   });
   
@@ -175,12 +187,13 @@ export async function getFooter() {
   return footer;
 }
 
-// Helper to get project by slug
-export async function getProjectBySlug(slug: string) {
+// Helper to get project by slug (with locale support)
+export async function getProjectBySlug(slug: string, locale: Locale = 'en') {
   const { isEnabled: isDraftMode } = await draftMode();
   const payload = await getPayloadClient();
   const projects = await payload.find({
     collection: "projects",
+    locale,
     draft: isDraftMode,
     where: {
       slug: {
@@ -192,7 +205,7 @@ export async function getProjectBySlug(slug: string) {
   return projects.docs[0] || null;
 }
 
-// Helper to get all projects (for static params)
+// Helper to get all projects (for static params - no locale needed)
 export async function getAllProjects() {
   const payload = await getPayloadClient();
   const projects = await payload.find({
@@ -201,4 +214,3 @@ export async function getAllProjects() {
   });
   return projects.docs;
 }
-

@@ -1,6 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "../globals.css";
+import "../../globals.css";
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages, setRequestLocale } from 'next-intl/server';
+import { routing } from '@/i18n/routing';
+import { notFound } from 'next/navigation';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -99,13 +103,32 @@ export const metadata: Metadata = {
 
 import { RefreshRouteOnSave } from "@/components/RefreshRouteOnSave";
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+// Generate static params for all locales
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+type Props = {
   children: React.ReactNode;
-}>) {
+  params: Promise<{ locale: string }>;
+};
+
+export default async function LocaleLayout({ children, params }: Props) {
+  const { locale } = await params;
+  
+  // Validate locale
+  if (!routing.locales.includes(locale as 'en' | 'es')) {
+    notFound();
+  }
+
+  // Enable static rendering
+  setRequestLocale(locale);
+
+  // Get messages for the current locale
+  const messages = await getMessages();
+
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang={locale} className="scroll-smooth">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -127,12 +150,14 @@ export default function RootLayout({
             `,
           }}
         />
-        <RefreshRouteOnSave />
-        {/* Skip Navigation Link for Accessibility */}
-        <a href="#main-content" className="skip-link">
-          Skip to main content
-        </a>
-        {children}
+        <NextIntlClientProvider messages={messages}>
+          <RefreshRouteOnSave />
+          {/* Skip Navigation Link for Accessibility */}
+          <a href="#main-content" className="skip-link">
+            Skip to main content
+          </a>
+          {children}
+        </NextIntlClientProvider>
       </body>
     </html>
   );

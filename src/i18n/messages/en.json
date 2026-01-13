@@ -1,0 +1,168 @@
+{
+  "nav": {
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "about": "About",
+    "testimonials": "Testimonials",
+    "contact": "Contact"
+  },
+  "hero": {
+    "badge": "Web Development Excellence",
+    "headline": "We Craft Digital Experiences That Inspire",
+    "highlightedText": "Digital Experiences",
+    "description": "Pilow is a premium web development agency specializing in crafting high-performance, accessible, and visually stunning digital solutions that drive business growth.",
+    "primaryButton": "Start Your Project",
+    "secondaryButton": "View Our Work",
+    "stats": {
+      "projects": "Projects Delivered",
+      "clients": "Happy Clients",
+      "experience": "Years Experience"
+    }
+  },
+  "services": {
+    "badge": "What We Do",
+    "title": "Services That Drive",
+    "titleHighlight": "Results",
+    "subtitle": "From concept to deployment, we offer comprehensive web development services tailored to your unique business needs.",
+    "items": {
+      "webDev": {
+        "title": "Web Development",
+        "description": "High-performance web applications using Next.js, React, and TypeScript."
+      },
+      "uiux": {
+        "title": "UI/UX Design",
+        "description": "Beautiful, intuitive interfaces that delight users and drive conversions."
+      },
+      "ecommerce": {
+        "title": "E-Commerce Solutions",
+        "description": "End-to-end e-commerce that drives sales. Fast, secure, and conversion-optimized."
+      },
+      "cms": {
+        "title": "CMS Development",
+        "description": "Flexible content management with headless CMS solutions like Payload and Sanity."
+      },
+      "mobile": {
+        "title": "Mobile-First Design",
+        "description": "Responsive designs that look stunning on every device."
+      },
+      "performance": {
+        "title": "Performance Optimization",
+        "description": "Lightning-fast websites that rank higher and convert better."
+      }
+    }
+  },
+  "portfolio": {
+    "badge": "Our Work",
+    "title": "Featured",
+    "titleHighlight": "Projects",
+    "subtitle": "Explore our portfolio of successful projects that have helped businesses achieve their digital transformation goals.",
+    "viewProject": "View Project",
+    "startProject": "Start Your Project",
+    "categories": {
+      "all": "All",
+      "webApplication": "Web Application",
+      "ecommerce": "E-Commerce",
+      "healthcare": "Healthcare",
+      "fintech": "FinTech",
+      "edtech": "EdTech",
+      "energy": "Energy"
+    }
+  },
+  "about": {
+    "badge": "About Us",
+    "headline": "Passionate About Building the",
+    "highlightedText": "Future of Web",
+    "description": "Pilow was founded with a simple mission: to help businesses succeed in the digital world through exceptional web development.",
+    "meetTeam": "Meet Our Team",
+    "values": {
+      "innovation": {
+        "title": "Innovation First",
+        "description": "We stay ahead of the curve, always exploring new technologies."
+      },
+      "collaboration": {
+        "title": "Collaboration",
+        "description": "We work as partners with our clients, not just service providers."
+      },
+      "quality": {
+        "title": "Quality Obsessed",
+        "description": "Every pixel, every line of code is crafted with attention to detail."
+      },
+      "performance": {
+        "title": "Performance Driven",
+        "description": "Speed and efficiency are at the core of everything we build."
+      }
+    },
+    "stats": {
+      "projects": "Projects Completed",
+      "clients": "Happy Clients",
+      "satisfaction": "Client Satisfaction",
+      "support": "Support Available"
+    }
+  },
+  "testimonials": {
+    "badge": "Testimonials",
+    "title": "What Our",
+    "titleHighlight": "Clients",
+    "titleEnd": "Say",
+    "subtitle": "Don't just take our word for it.",
+    "trustedBy": "Trusted by innovative companies worldwide"
+  },
+  "contact": {
+    "badge": "Get In Touch",
+    "title": "Let's Build Something",
+    "titleHighlight": "Amazing",
+    "subtitle": "Ready to start your project? We'd love to hear from you. Fill out the form below and we'll get back to you within 24 hours.",
+    "form": {
+      "name": "Your Name",
+      "email": "Email Address",
+      "company": "Company (Optional)",
+      "budget": "Project Budget",
+      "message": "Tell us about your project",
+      "submit": "Send Message",
+      "sending": "Sending...",
+      "budgetOptions": {
+        "select": "Select budget range",
+        "small": "$5,000 - $10,000",
+        "medium": "$10,000 - $25,000",
+        "large": "$25,000 - $50,000",
+        "enterprise": "$50,000+"
+      }
+    },
+    "info": {
+      "email": "Email Us",
+      "response": "Response Time",
+      "responseValue": "Within 24 hours"
+    }
+  },
+  "footer": {
+    "cta": {
+      "title": "Ready to Get Started?",
+      "subtitle": "Let's create something extraordinary together.",
+      "button": "Start Your Project"
+    },
+    "description": "Pilow is a premium web development agency crafting exceptional digital experiences that drive business growth.",
+    "sections": {
+      "services": "Services",
+      "company": "Company",
+      "legal": "Legal"
+    },
+    "links": {
+      "webDev": "Web Development",
+      "uiux": "UI/UX Design",
+      "ecommerce": "E-Commerce",
+      "cms": "CMS Development",
+      "about": "About Us",
+      "portfolio": "Portfolio",
+      "careers": "Careers",
+      "blog": "Blog",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "cookies": "Cookie Policy"
+    },
+    "copyright": "Pilow. All rights reserved.",
+    "madeWith": "Crafted with ❤️ and lots of ☕"
+  },
+  "common": {
+    "scrollToExplore": "Scroll to explore"
+  }
+}

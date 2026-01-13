@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export interface HeaderProps {
   logo?: {
@@ -148,6 +149,9 @@ export default function Header({ logo, navItems }: HeaderProps) {
               </a>
             </li>
           ))}
+          <li>
+            <LanguageSwitcher />
+          </li>
           <li>
             <button
               onClick={toggleTheme}

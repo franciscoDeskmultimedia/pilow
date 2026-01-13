@@ -1,0 +1,168 @@
+{
+  "nav": {
+    "services": "Servicios",
+    "portfolio": "Portafolio",
+    "about": "Nosotros",
+    "testimonials": "Testimonios",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "badge": "Excelencia en Desarrollo Web",
+    "headline": "Creamos Experiencias Digitales Que Inspiran",
+    "highlightedText": "Experiencias Digitales",
+    "description": "Pilow es una agencia de desarrollo web premium especializada en crear soluciones digitales de alto rendimiento, accesibles y visualmente impresionantes que impulsan el crecimiento empresarial.",
+    "primaryButton": "Inicia Tu Proyecto",
+    "secondaryButton": "Ver Nuestro Trabajo",
+    "stats": {
+      "projects": "Proyectos Entregados",
+      "clients": "Clientes Satisfechos",
+      "experience": "Años de Experiencia"
+    }
+  },
+  "services": {
+    "badge": "Lo Que Hacemos",
+    "title": "Servicios Que Generan",
+    "titleHighlight": "Resultados",
+    "subtitle": "Desde el concepto hasta el despliegue, ofrecemos servicios integrales de desarrollo web adaptados a tus necesidades empresariales únicas.",
+    "items": {
+      "webDev": {
+        "title": "Desarrollo Web",
+        "description": "Aplicaciones web de alto rendimiento usando Next.js, React y TypeScript."
+      },
+      "uiux": {
+        "title": "Diseño UI/UX",
+        "description": "Interfaces hermosas e intuitivas que deleitan a los usuarios y aumentan las conversiones."
+      },
+      "ecommerce": {
+        "title": "Soluciones E-Commerce",
+        "description": "E-commerce integral que impulsa ventas. Rápido, seguro y optimizado para conversiones."
+      },
+      "cms": {
+        "title": "Desarrollo CMS",
+        "description": "Gestión de contenido flexible con soluciones headless CMS como Payload y Sanity."
+      },
+      "mobile": {
+        "title": "Diseño Mobile-First",
+        "description": "Diseños responsivos que lucen increíbles en cualquier dispositivo."
+      },
+      "performance": {
+        "title": "Optimización de Rendimiento",
+        "description": "Sitios web ultrarrápidos que posicionan mejor y convierten más."
+      }
+    }
+  },
+  "portfolio": {
+    "badge": "Nuestro Trabajo",
+    "title": "Proyectos",
+    "titleHighlight": "Destacados",
+    "subtitle": "Explora nuestro portafolio de proyectos exitosos que han ayudado a empresas a lograr sus objetivos de transformación digital.",
+    "viewProject": "Ver Proyecto",
+    "startProject": "Inicia Tu Proyecto",
+    "categories": {
+      "all": "Todos",
+      "webApplication": "Aplicación Web",
+      "ecommerce": "E-Commerce",
+      "healthcare": "Salud",
+      "fintech": "FinTech",
+      "edtech": "EdTech",
+      "energy": "Energía"
+    }
+  },
+  "about": {
+    "badge": "Sobre Nosotros",
+    "headline": "Apasionados por Construir el",
+    "highlightedText": "Futuro de la Web",
+    "description": "Pilow fue fundada con una misión simple: ayudar a las empresas a tener éxito en el mundo digital a través de un desarrollo web excepcional.",
+    "meetTeam": "Conoce a Nuestro Equipo",
+    "values": {
+      "innovation": {
+        "title": "Innovación Primero",
+        "description": "Nos mantenemos a la vanguardia, siempre explorando nuevas tecnologías."
+      },
+      "collaboration": {
+        "title": "Colaboración",
+        "description": "Trabajamos como socios con nuestros clientes, no solo como proveedores de servicios."
+      },
+      "quality": {
+        "title": "Obsesionados con la Calidad",
+        "description": "Cada píxel, cada línea de código está elaborada con atención al detalle."
+      },
+      "performance": {
+        "title": "Orientados al Rendimiento",
+        "description": "La velocidad y eficiencia están en el núcleo de todo lo que construimos."
+      }
+    },
+    "stats": {
+      "projects": "Proyectos Completados",
+      "clients": "Clientes Satisfechos",
+      "satisfaction": "Satisfacción del Cliente",
+      "support": "Soporte Disponible"
+    }
+  },
+  "testimonials": {
+    "badge": "Testimonios",
+    "title": "Lo Que Dicen Nuestros",
+    "titleHighlight": "Clientes",
+    "titleEnd": "",
+    "subtitle": "No solo lo decimos nosotros.",
+    "trustedBy": "Confiado por empresas innovadoras en todo el mundo"
+  },
+  "contact": {
+    "badge": "Contáctanos",
+    "title": "Construyamos Algo",
+    "titleHighlight": "Increíble",
+    "subtitle": "¿Listo para iniciar tu proyecto? Nos encantaría saber de ti. Completa el formulario y te responderemos en 24 horas.",
+    "form": {
+      "name": "Tu Nombre",
+      "email": "Correo Electrónico",
+      "company": "Empresa (Opcional)",
+      "budget": "Presupuesto del Proyecto",
+      "message": "Cuéntanos sobre tu proyecto",
+      "submit": "Enviar Mensaje",
+      "sending": "Enviando...",
+      "budgetOptions": {
+        "select": "Selecciona rango de presupuesto",
+        "small": "$5,000 - $10,000",
+        "medium": "$10,000 - $25,000",
+        "large": "$25,000 - $50,000",
+        "enterprise": "$50,000+"
+      }
+    },
+    "info": {
+      "email": "Escríbenos",
+      "response": "Tiempo de Respuesta",
+      "responseValue": "Dentro de 24 horas"
+    }
+  },
+  "footer": {
+    "cta": {
+      "title": "¿Listo para Comenzar?",
+      "subtitle": "Creemos algo extraordinario juntos.",
+      "button": "Inicia Tu Proyecto"
+    },
+    "description": "Pilow es una agencia de desarrollo web premium que crea experiencias digitales excepcionales que impulsan el crecimiento empresarial.",
+    "sections": {
+      "services": "Servicios",
+      "company": "Empresa",
+      "legal": "Legal"
+    },
+    "links": {
+      "webDev": "Desarrollo Web",
+      "uiux": "Diseño UI/UX",
+      "ecommerce": "E-Commerce",
+      "cms": "Desarrollo CMS",
+      "about": "Sobre Nosotros",
+      "portfolio": "Portafolio",
+      "careers": "Carreras",
+      "blog": "Blog",
+      "privacy": "Política de Privacidad",
+      "terms": "Términos de Servicio",
+      "cookies": "Política de Cookies"
+    },
+    "copyright": "Pilow. Todos los derechos reservados.",
+    "madeWith": "Hecho con ❤️ y mucho ☕"
+  },
+  "common": {
+    "scrollToExplore": "Desplázate para explorar"
+  }
+}

@@ -9,7 +9,8 @@ export const Projects: CollectionConfig = {
     livePreview: {
       url: ({ data, locale }) => {
         const path = data?.slug ? `projects/${data.slug}` : 'projects';
-        const localePrefix = locale === 'en' ? '' : `/${locale}`;
+        const localeStr = String(locale);
+        const localePrefix = localeStr === 'en' ? '' : `/${localeStr}`;
         return `${process.env.NEXT_PUBLIC_APP_URL || ''}${localePrefix}/${path}`;
       },
     },

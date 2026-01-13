@@ -87,7 +87,7 @@ export default function Footer({ logo, copyright, socialLinks, navItems }: Foote
   })) || defaultSocialLinks;
 
   return (
-    <footer className="bg-pilow-slate-dark text-white" role="contentinfo">
+    <footer className="bg-pilow-slate-dark text-white py-16" role="contentinfo">
       {/* CTA Section */}
       <div className="border-b border-white/10">
         <div className="container py-16">

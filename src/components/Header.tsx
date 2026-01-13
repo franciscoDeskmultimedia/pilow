@@ -66,13 +66,11 @@ export default function Header({ logo, navItems }: HeaderProps) {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    // Check initial preference
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      setIsDark(true);
-      document.documentElement.classList.add('dark');
-    } else {
-      setIsDark(false);
-      document.documentElement.classList.remove('dark');
+    // Sync React state with DOM state on mount
+    const isDarkMode = document.documentElement.classList.contains('dark');
+    if (isDarkMode) {
+      // Defer state update to avoid synchronous render warning
+      setTimeout(() => setIsDark(true), 0);
     }
   }, []);
 

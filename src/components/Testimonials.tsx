@@ -89,7 +89,7 @@ export default function Testimonials({ testimonials = defaultTestimonials }: Tes
         <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.4 }} className="mt-20 pt-12 border-t border-white/10">
           <p className="text-center text-sm text-gray-400 mb-8">Trusted by innovative companies worldwide</p>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
-            {testimonials.slice(0, 5).map((t) => (<div key={t.id} className="text-xl font-bold text-white/30 hover:text-white/60 transition-colors">{t.company}</div>))}
+            {testimonials.slice(0, 5).map((t) => (<div key={t.id} className="text-xl font-bold text-white/60 hover:text-white transition-colors">{t.company}</div>))}
           </div>
         </motion.div>
       </div>

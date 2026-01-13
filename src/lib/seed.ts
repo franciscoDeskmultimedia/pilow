@@ -209,6 +209,7 @@ export async function seed(payload: Payload) {
                 slug,
                 featuredImage: imageId,
                 gallery: [{ image: imageId }, { image: imageId }], // Reuse for gallery for now
+                _status: 'published', // Ensure projects are published
             },
         });
         console.log(`Created project: ${project.title}`);

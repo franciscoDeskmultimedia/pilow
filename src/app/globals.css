@@ -57,24 +57,17 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0f1419;
-    --foreground: #f0f4f8; /* Brighter white for main text */
-    --muted: #1a2332;
-    --muted-foreground: #cbd5e1; /* Lighter gray for secondary text */
-    --pilow-slate: #94a3b8; /* Lighten slate in dark mode */
-    --pilow-slate-dark: #cbd5e1; /* Make dark slate light in dark mode */
-  }
-}
-/* Manual Dark Mode Class */
+/* Dark Mode - Class Based Only */
+@custom-variant dark (&:where(.dark, .dark *));
+
 .dark {
-  --background: #0f1419;
-  --foreground: #f0f4f8;
-  --muted: #1a2332;
-  --muted-foreground: #cbd5e1;
-  --pilow-slate: #94a3b8;
-  --pilow-slate-dark: #cbd5e1;
+  --background: #020617; /* Slate 950 - Much darker */
+  --foreground: #f8fafc; /* Slate 50 - Much brighter */
+  --muted: #1e293b; /* Slate 800 */
+  --muted-foreground: #94a3b8; /* Slate 400 - Readable on dark */
+  /* NOTE: Do NOT override --pilow-slate and --pilow-slate-dark here!
+     Those are used as BACKGROUND colors in sections like Testimonials.
+     Components that need light text should use explicit dark:text-* classes. */
 }
 
 /* Base Styles */
@@ -284,10 +277,20 @@ body {
   font-size: 1rem;
 }
 
+.dark .btn-secondary {
+  color: #22d3ee; /* cyan-400 */
+  border-color: #22d3ee;
+}
+
 .btn-secondary:hover {
   background: var(--pilow-ocean);
   color: white;
   transform: translateY(-2px);
+}
+
+.dark .btn-secondary:hover {
+  background: #22d3ee;
+  color: #020617;
 }
 
 /* Section Styles */

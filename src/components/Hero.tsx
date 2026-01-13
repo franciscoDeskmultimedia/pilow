@@ -85,7 +85,7 @@ export default function Hero(props: HeroProps = {}) {
               )}
             </h1>
 
-            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="text-lg sm:text-xl text-pilow-slate max-w-xl mx-auto lg:mx-0 mb-8">
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="text-lg sm:text-xl text-pilow-slate dark:text-gray-300 max-w-xl mx-auto lg:mx-0 mb-8">
               {description}
             </motion.p>
 
@@ -106,7 +106,7 @@ export default function Hero(props: HeroProps = {}) {
               {stats?.map((stat, index) => (
                 <div key={index} className="text-center lg:text-left">
                   <div className="text-3xl font-bold gradient-text">{stat.value}</div>
-                  <div className="text-sm text-pilow-slate">{stat.label}</div>
+                  <div className="text-sm text-pilow-slate dark:text-gray-300">{stat.label}</div>
                 </div>
               ))}
             </motion.div>
@@ -137,16 +137,16 @@ export default function Hero(props: HeroProps = {}) {
                   </div>
                 </div>
               </div>
-              <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 3, repeat: Infinity }} className="absolute -top-4 -right-4 bg-white dark:bg-pilow-slate shadow-lg rounded-xl p-4">
+              <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 3, repeat: Infinity }} className="absolute -top-4 -right-4 bg-white dark:bg-slate-800 shadow-lg rounded-xl p-4">
                 <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 bg-pilow-ocean rounded-lg flex items-center justify-center text-2xl">⚡</div>
-                  <div><div className="text-sm font-semibold text-pilow-slate-dark dark:text-white">Fast</div><div className="text-xs text-pilow-slate">100% Lighthouse</div></div>
+                  <div className="w-10 h-10 bg-pilow-ocean dark:bg-cyan-500 rounded-lg flex items-center justify-center text-2xl">⚡</div>
+                  <div><div className="text-sm font-semibold text-pilow-slate-dark dark:text-white">Fast</div><div className="text-xs text-pilow-slate dark:text-gray-300">100% Lighthouse</div></div>
                 </div>
               </motion.div>
-              <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 4, repeat: Infinity, delay: 1 }} className="absolute -bottom-4 -left-4 bg-white dark:bg-pilow-slate shadow-lg rounded-xl p-4">
+              <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 4, repeat: Infinity, delay: 1 }} className="absolute -bottom-4 -left-4 bg-white dark:bg-slate-800 shadow-lg rounded-xl p-4">
                 <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 bg-pilow-lavender rounded-lg flex items-center justify-center text-2xl">✓</div>
-                  <div><div className="text-sm font-semibold text-pilow-slate-dark dark:text-white">A11y</div><div className="text-xs text-pilow-slate">WCAG 2.1 AA</div></div>
+                  <div className="w-10 h-10 bg-pilow-lavender dark:bg-emerald-600 rounded-lg flex items-center justify-center text-2xl">✓</div>
+                  <div><div className="text-sm font-semibold text-pilow-slate-dark dark:text-white">A11y</div><div className="text-xs text-pilow-slate dark:text-gray-300">WCAG 2.1 AA</div></div>
                 </div>
               </motion.div>
             </div>

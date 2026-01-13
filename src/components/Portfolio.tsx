@@ -50,14 +50,14 @@ export default function Portfolio({ projects = defaultProjects }: PortfolioProps
     <section id="portfolio" className="section" aria-labelledby="portfolio-title">
       <div className="container">
         <motion.div ref={ref} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="text-center mb-12">
-          <span className="inline-block px-4 py-2 rounded-full bg-pilow-lavender text-pilow-slate-dark text-sm font-medium mb-4">Our Work</span>
+          <span className="inline-block px-4 py-2 rounded-full bg-pilow-lavender dark:bg-slate-700 text-pilow-slate-dark dark:text-gray-100 text-sm font-medium mb-4">Our Work</span>
           <h2 id="portfolio-title" className="section-title">Featured <span className="gradient-text">Projects</span></h2>
           <p className="section-subtitle">Explore our portfolio of successful projects that have helped businesses achieve their digital transformation goals.</p>
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.2 }} className="flex flex-wrap justify-center gap-3 mb-12" role="tablist" aria-label="Filter by category">
           {categories.map((cat) => (
-            <button key={cat} onClick={() => setActiveCategory(cat)} role="tab" aria-selected={activeCategory === cat} className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === cat ? "bg-pilow-ocean text-white shadow-lg shadow-pilow-ocean/30" : "bg-pilow-lavender-light text-pilow-slate hover:bg-pilow-lavender"}`}>
+            <button key={cat} onClick={() => setActiveCategory(cat)} role="tab" aria-selected={activeCategory === cat} className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === cat ? "bg-pilow-ocean text-white shadow-lg shadow-pilow-ocean/30" : "bg-pilow-lavender-light dark:bg-slate-700 text-pilow-slate dark:text-gray-200 hover:bg-pilow-lavender dark:hover:bg-slate-600"}`}>
               {cat === "All" ? "All" : categoryLabels[cat] || cat}
             </button>
           ))}
@@ -71,7 +71,7 @@ export default function Portfolio({ projects = defaultProjects }: PortfolioProps
                   <div className="text-white/20 text-6xl font-bold">{project.title.charAt(0)}</div>
                 </div>
                 <motion.div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black/50">
-                  <a href={project.projectUrl || "#"} className="px-6 py-3 bg-white text-pilow-slate-dark font-medium rounded-full hover:bg-pilow-cyan transition-colors" aria-label={`View ${project.title}`}>View Project</a>
+                  <a href={project.projectUrl || "#"} className="px-6 py-3 bg-white dark:bg-slate-800 text-pilow-slate-dark dark:text-white font-medium rounded-full hover:bg-pilow-cyan dark:hover:bg-cyan-600 transition-colors" aria-label={`View ${project.title}`}>View Project</a>
                 </motion.div>
               </div>
               <div className="p-6">

@@ -25,20 +25,20 @@ export default function ProjectTemplate({ project: initialProject, header, foote
   return (
     <>
       <Header {...header} />
-      <main className="min-h-screen bg-pilow-light pt-24 pb-20">
+      <main className="min-h-screen bg-pilow-light dark:bg-gray-900 pt-24 pb-20 transition-colors duration-300">
         <div className="container mx-auto px-4">
           {/* Header Section */}
           <div className="max-w-4xl mx-auto text-center mb-12">
             {project.category && (
-              <span className="inline-block px-4 py-1 rounded-full bg-pilow-blue/10 text-pilow-blue text-sm font-semibold mb-6 capitalize">
+              <span className="inline-block px-4 py-1 rounded-full bg-pilow-blue/10 dark:bg-pilow-ocean/20 text-pilow-blue dark:text-pilow-cyan text-sm font-semibold mb-6 capitalize">
                 {project.category.replace('-', ' ')}
               </span>
             )}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-gray-50 mb-6">
               {project.title}
             </h1>
             {project.description && (
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
                 {project.description}
               </p>
             )}
@@ -46,7 +46,7 @@ export default function ProjectTemplate({ project: initialProject, header, foote
 
           {/* Featured Image */}
           {project.featuredImage && (
-            <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl mb-16 border border-gray-100">
+            <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl mb-16 border border-gray-100 dark:border-gray-800">
                {typeof project.featuredImage === 'object' && project.featuredImage.url && (
                 <Image
                   src={project.featuredImage.url}
@@ -64,16 +64,16 @@ export default function ProjectTemplate({ project: initialProject, header, foote
             {/* Sidebar / Info */}
             <div className="lg:col-span-1 space-y-8">
               {/* Project Info Card */}
-              <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-                <h3 className="text-lg font-bold text-gray-900 mb-6">Project Details</h3>
+              <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 transition-colors duration-300">
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6">Project Details</h3>
                 
                 {project.tags && project.tags.length > 0 && (
                   <div className="mb-8">
-                    <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Technologies</h4>
+                    <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">Technologies</h4>
                     <div className="flex flex-wrap gap-2">
                       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                       {project.tags.map((tagItem: any, i: number) => (
-                        <span key={i} className="px-3 py-1 bg-gray-50 text-gray-700 text-sm rounded-lg border border-gray-100">
+                        <span key={i} className="px-3 py-1 bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-200 text-sm rounded-lg border border-gray-100 dark:border-gray-600 transition-colors duration-300">
                           {tagItem.tag}
                         </span>
                       ))}
@@ -101,12 +101,12 @@ export default function ProjectTemplate({ project: initialProject, header, foote
 
             {/* Main Content */}
             <div className="lg:col-span-2">
-              <div className="prose prose-lg prose-blue max-w-none bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100">
+              <div className="prose prose-lg prose-blue dark:prose-invert max-w-none bg-white dark:bg-gray-800 p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 transition-colors duration-300">
                 {project.fullDescription && (
                    <RichText data={project.fullDescription} />
                 )}
                 {!project.fullDescription && (
-                  <p className="text-gray-500 italic">No detailed description available.</p>
+                  <p className="text-gray-500 dark:text-gray-400 italic">No detailed description available.</p>
                 )}
               </div>
             </div>
@@ -115,12 +115,12 @@ export default function ProjectTemplate({ project: initialProject, header, foote
           {/* Gallery */}
           {project.gallery && project.gallery.length > 0 && (
             <div className="mt-20 max-w-6xl mx-auto">
-              <h2 className="text-3xl font-bold text-gray-900 mb-10 text-center">Project Gallery</h2>
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-10 text-center">Project Gallery</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                 {project.gallery.map((item: any, i: number) => (
                   item.image && typeof item.image === 'object' && item.image.url && (
-                    <div key={i} className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 group">
+                    <div key={i} className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 group bg-gray-100 dark:bg-gray-800">
                       <Image
                         src={item.image.url}
                         alt={item.image.alt || `Gallery image ${i + 1}`}

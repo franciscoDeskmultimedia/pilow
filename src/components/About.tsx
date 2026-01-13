@@ -82,12 +82,12 @@ export default function About({
             <div className="relative">
               <div className="absolute -inset-4 bg-gradient-to-br from-pilow-ocean/20 to-pilow-cyan/20 rounded-3xl transform rotate-2" aria-hidden="true" />
               <div className="absolute -inset-4 bg-gradient-to-tr from-pilow-lavender/40 to-pilow-cyan/20 rounded-3xl transform -rotate-2" aria-hidden="true" />
-              <div className="relative bg-white dark:bg-pilow-slate-dark/50 rounded-2xl p-8 shadow-xl">
+              <div className="relative bg-white dark:bg-slate-900 rounded-2xl p-8 shadow-xl">
                 <div className="grid grid-cols-2 gap-8 mb-8">
                   {stats.map((stat, index) => (
-                    <motion.div key={stat.label} initial={{ opacity: 0, scale: 0.8 }} animate={isInView ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }} className="text-center p-4 bg-pilow-lavender-light dark:bg-pilow-slate/30 rounded-xl">
-                      <div className="text-3xl font-bold gradient-text">{stat.value}</div>
-                      <div className="text-sm text-pilow-slate dark:text-gray-400 mt-1">{stat.label}</div>
+                    <motion.div key={stat.label} initial={{ opacity: 0, scale: 0.8 }} animate={isInView ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }} className="text-center p-4 bg-pilow-lavender-light dark:bg-slate-800 rounded-xl">
+                      <div className="text-3xl font-bold text-pilow-ocean dark:text-cyan-400">{stat.value}</div>
+                      <div className="text-sm text-pilow-slate dark:text-gray-300 mt-1">{stat.label}</div>
                     </motion.div>
                   ))}
                 </div>
@@ -99,7 +99,7 @@ export default function About({
                         {initial}
                       </motion.div>
                     ))}
-                    <motion.div initial={{ opacity: 0, x: -10 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.3, delay: 0.9 }} className="w-14 h-14 rounded-full bg-pilow-lavender flex items-center justify-center text-pilow-slate-dark font-medium text-sm ring-4 ring-white dark:ring-pilow-slate-dark">
+                    <motion.div initial={{ opacity: 0, x: -10 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.3, delay: 0.9 }} className="w-14 h-14 rounded-full bg-pilow-lavender dark:bg-slate-600 flex items-center justify-center text-pilow-slate-dark dark:text-white font-medium text-sm ring-4 ring-white dark:ring-slate-900">
                       +10
                     </motion.div>
                   </div>

@@ -1,6 +1,6 @@
 import Header, { HeaderProps } from "@/components/Header";
 import Footer, { FooterProps } from "@/components/Footer";
-import BlockRenderer from "@/components/BlockRenderer";
+import LiveContent from "@/components/LiveContent";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import Portfolio from "@/components/Portfolio";
@@ -75,8 +75,8 @@ export default async function Home() {
       <>
         <Header {...(header as unknown as HeaderProps)} />
         <main id="main-content" role="main">
-          <BlockRenderer
-            blocks={page.layout as never}
+          <LiveContent
+            page={page}
             services={services}
             projects={projects}
             testimonials={testimonials}

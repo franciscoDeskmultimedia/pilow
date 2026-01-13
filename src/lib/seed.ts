@@ -7,13 +7,74 @@ import fs from 'fs'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+const generateRichText = (text: string) => ({
+  root: {
+    type: "root",
+    children: [
+      {
+        type: "paragraph",
+        children: [
+          {
+            type: "text",
+            detail: 0,
+            format: 0,
+            mode: "normal",
+            style: "",
+            text: text,
+            version: 1,
+          },
+        ],
+        direction: "ltr",
+        format: "",
+        indent: 0,
+        textFormat: 0,
+        version: 1,
+      },
+    ],
+    direction: "ltr",
+    format: "",
+    indent: 0,
+    version: 1,
+  },
+});
+
 const defaultProjects = [
-  { title: "TechFlow SaaS Platform", category: "web-application", description: "A comprehensive SaaS platform for workflow automation.", tags: [{ tag: "Next.js" }, { tag: "TypeScript" }, { tag: "Supabase" }], featured: true },
-  { title: "Luxe Fashion E-commerce", category: "e-commerce", description: "High-end fashion e-commerce with AR try-on features.", tags: [{ tag: "Shopify" }, { tag: "React" }, { tag: "AI/ML" }], featured: true  },
-  { title: "HealthConnect Portal", category: "healthcare", description: "Patient portal with telemedicine integration.", tags: [{ tag: "Next.js" }, { tag: "HIPAA Compliant" }, { tag: "WebRTC" }], featured: true  },
-  { title: "FinanceHub Dashboard", category: "fintech", description: "Real-time financial dashboard with portfolio tracking.", tags: [{ tag: "React" }, { tag: "D3.js" }, { tag: "Node.js" }], featured: true  },
-  { title: "EduLearn Platform", category: "edtech", description: "Interactive learning platform with video courses.", tags: [{ tag: "Next.js" }, { tag: "Payload CMS" }, { tag: "Stripe" }], featured: true  },
-  { title: "GreenEnergy Portal", category: "energy", description: "Smart energy monitoring dashboard with IoT.", tags: [{ tag: "React" }, { tag: "IoT" }, { tag: "GraphQL" }], featured: true  },
+  { 
+    title: "TechFlow SaaS Platform", 
+    category: "web-application", 
+    description: "A comprehensive SaaS platform for workflow automation, featuring real-time collaboration and analytics.", 
+    fullDescription: generateRichText("TechFlow is a cutting-edge SaaS platform designed to streamline enterprise workflows. Built with Next.js and Supabase, it offers real-time collaboration features, advanced analytics dashboards, and seamless integration with third-party tools. The platform handles over 100k daily active users with sub-second latency."),
+    tags: [{ tag: "Next.js" }, { tag: "TypeScript" }, { tag: "Supabase" }, { tag: "Tailwind" }], 
+    imageFile: "project-saas.jpg",
+    featured: true 
+  },
+  { 
+    title: "Luxe Fashion E-commerce", 
+    category: "e-commerce", 
+    description: "High-end fashion e-commerce experience with AR try-on features and AI-powered recommendations.", 
+    fullDescription: generateRichText("We redefined the online luxury shopping experience for Luxe Fashion. The platform features 3D product visualization, AR virtual try-on, and an AI styling assistant. The headless Shopify architecture allows for blazing fast page loads and a completely custom frontend experience."),
+    tags: [{ tag: "Shopify Plus" }, { tag: "React" }, { tag: "Three.js" }, { tag: "AI/ML" }], 
+    imageFile: "project-ecommerce.jpg",
+    featured: true  
+  },
+  { 
+    title: "HealthConnect Portal", 
+    category: "healthcare", 
+    description: "Secure patient portal with telemedicine integration and HIPAA-compliant data handling.", 
+    fullDescription: generateRichText("HealthConnect connects patients with healthcare providers securely and efficiently. Key features include encrypted video consultations, secure document sharing, and real-time appointment scheduling. The system is fully HIPAA compliant and audits have shown 99.99% uptime."),
+    tags: [{ tag: "Next.js" }, { tag: "HIPAA Compliant" }, { tag: "WebRTC" }, { tag: "PostgreSQL" }], 
+    imageFile: "project-health.jpg",
+    featured: true  
+  },
+  { 
+    title: "FinanceHub Dashboard", 
+    category: "fintech", 
+    description: "Real-time financial dashboard with advanced portfolio tracking and predictive modeling.", 
+    fullDescription: generateRichText("Values billions of dollars in transactions daily, FinanceHub needed a robust and accurate visualization layer. We built a high-performance dashboard using D3.js and React that processes market data in real-time, providing traders with the split-second information they need."),
+    tags: [{ tag: "React" }, { tag: "D3.js" }, { tag: "Node.js" }, { tag: "Redis" }], 
+    imageFile: "project-fintech.jpg",
+    featured: true  
+  },
 ];
 
 const defaultTestimonials = [
@@ -71,24 +132,17 @@ export async function seed(payload: Payload) {
 
   // 1. Upload Logo & Placeholder
   let logoId;
-  let placeholderId;
   const logoPath = path.resolve(dirname, '../../public/logo.png');
-  // Use logo as placeholder for now if no other image
   
   try {
-      // Check if media already exists (basic check)
-      const existingMedia = await payload.find({ collection: 'media', limit: 5 });
-      if (existingMedia.docs.length > 0) {
-          // just pick the first one or look for specific ones
-          logoId = existingMedia.docs.find(d => d.alt === 'Pilow Logo')?.id || existingMedia.docs[0].id;
-          placeholderId = logoId; 
+      const existingLogo = await payload.find({ collection: 'media', where: { alt: { equals: 'Pilow Logo' } } });
+      if (existingLogo.docs.length > 0) {
+          logoId = existingLogo.docs[0].id;
       } else if (fs.existsSync(logoPath)) {
         const fileData = fs.readFileSync(logoPath);
         const media = await payload.create({
             collection: 'media',
-            data: {
-                alt: 'Pilow Logo',
-            },
+            data: { alt: 'Pilow Logo' },
             file: {
                 data: fileData,
                 name: 'logo.png',
@@ -97,41 +151,68 @@ export async function seed(payload: Payload) {
             }
         });
         logoId = media.id;
-        placeholderId = media.id;
         console.log(`Uploaded logo, ID: ${logoId}`);
-      } else {
-        console.warn('Logo file not found at public/logo.png, skipping logo upload.');
       }
   } catch (e) {
       console.error('Error uploading logo:', e);
   }
 
-  // 2. Seed Projects
-  if (placeholderId) {
-    for (const project of defaultProjects) {
-        const existing = await payload.find({
-            collection: 'projects',
-            where: { title: { equals: project.title } }
-        });
+  // 2. Seed Projects with specific images
+  for (const project of defaultProjects) {
+    const existing = await payload.find({
+        collection: 'projects',
+        where: { title: { equals: project.title } }
+    });
+    
+    if (existing.docs.length === 0) {
+        // Upload image for project
+        let imageId = logoId; // fallback
+        const imagePath = path.resolve(dirname, `../../public/seed-images/${project.imageFile}`);
         
-        if (existing.docs.length === 0) {
-            // Generate a simple slug
-            const slug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-            
-            await payload.create({
-                collection: 'projects',
-                data: {
-                    ...project,
-                    slug,
-                    featuredImage: placeholderId,
-                    gallery: [{ image: placeholderId }],
-                },
-            });
-            console.log(`Created project: ${project.title}`);
+        if (fs.existsSync(imagePath)) {
+            try {
+                // Check if image already exists to avoid dupes
+                const existingImg = await payload.find({ collection: 'media', where: { alt: { equals: project.title } } });
+                if (existingImg.docs.length > 0) {
+                    imageId = existingImg.docs[0].id;
+                } else {
+                    const fileData = fs.readFileSync(imagePath);
+                    const media = await payload.create({
+                        collection: 'media',
+                        data: { alt: project.title },
+                        file: {
+                            data: fileData,
+                            name: project.imageFile,
+                            mimetype: 'image/jpeg',
+                            size: fileData.length,
+                        }
+                    });
+                    imageId = media.id;
+                    console.log(`Uploaded image for ${project.title}`);
+                }
+            } catch (e) {
+                console.error(`Error uploading image for ${project.title}:`, e);
+            }
+        } else {
+            console.warn(`Image not found: ${imagePath}, using logo as fallback`);
         }
+
+        const slug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        
+        // Remove imageFile from spread
+        const { imageFile, ...projectData } = project;
+
+        await payload.create({
+            collection: 'projects',
+            data: {
+                ...projectData,
+                slug,
+                featuredImage: imageId,
+                gallery: [{ image: imageId }, { image: imageId }], // Reuse for gallery for now
+            },
+        });
+        console.log(`Created project: ${project.title}`);
     }
-  } else {
-      console.warn('Skipping projects seed: No placeholder image available for required featuredImage field.');
   }
 
   // 3. Seed Testimonials
@@ -144,10 +225,7 @@ export async function seed(payload: Payload) {
     if (existing.docs.length === 0) {
         await payload.create({
             collection: 'testimonials',
-            data: {
-                ...testimonial,
-                // Avatar is optional in schema, so we can omit if we don't have one, or use placeholderId if we want
-            },
+            data: { ...testimonial },
         });
         console.log(`Created testimonial: ${testimonial.author}`);
     }
@@ -168,10 +246,7 @@ export async function seed(payload: Payload) {
               isHomepage: true,
               status: 'published',
               layout: [
-                  {
-                      blockType: 'hero',
-                      ...heroData,
-                  },
+                  { blockType: 'hero', ...heroData },
                   {
                       blockType: 'services',
                       source: 'custom',
@@ -189,10 +264,7 @@ export async function seed(payload: Payload) {
                       headline: "Featured Projects",
                       highlightedText: "Projects",
                   },
-                  {
-                      blockType: 'about',
-                      ...aboutData,
-                  },
+                  { blockType: 'about', ...aboutData },
                   {
                       blockType: 'testimonials',
                       source: 'collection',
@@ -213,14 +285,10 @@ export async function seed(payload: Payload) {
           }
       });
       console.log('Created Homepage');
-  } else {
-      console.log('Homepage already exists, skipping creation.');
   }
 
   // 5. Seed Globals
   if (logoId) {
-    // Check if Header is already set up to avoid overwriting user changes?
-    // We'll just update if it looks empty or if we want to enforce defaults
     const header = await payload.findGlobal({ slug: 'header' });
     if (!header.logo) {
       await payload.updateGlobal({
@@ -228,11 +296,11 @@ export async function seed(payload: Payload) {
           data: {
               logo: logoId,
               navItems: [
-                  { link: { type: 'custom', url: '#services', label: 'Services' } },
-                  { link: { type: 'custom', url: '#portfolio', label: 'Portfolio' } },
-                  { link: { type: 'custom', url: '#about', label: 'About' } },
-                  { link: { type: 'custom', url: '#testimonials', label: 'Testimonials' } },
-                  { link: { type: 'custom', url: '#contact', label: 'Contact' } },
+                  { link: { type: 'custom', url: '/#services', label: 'Services' } },
+                  { link: { type: 'custom', url: '/#portfolio', label: 'Portfolio' } },
+                  { link: { type: 'custom', url: '/#about', label: 'About' } },
+                  { link: { type: 'custom', url: '/#testimonials', label: 'Testimonials' } },
+                  { link: { type: 'custom', url: '/#contact', label: 'Contact' } },
               ]
           }
       });
@@ -249,8 +317,7 @@ export async function seed(payload: Payload) {
             socialLinks: [
                 { platform: 'twitter', url: '#' },
                 { platform: 'linkedin', url: '#' },
-                { platform: 'github', url: '#' },
-                { platform: 'instagram', url: '#' },
+                { platform: 'github', url: '#' }
             ]
         }
       });

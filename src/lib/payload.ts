@@ -175,3 +175,30 @@ export async function getFooter() {
   return footer;
 }
 
+// Helper to get project by slug
+export async function getProjectBySlug(slug: string) {
+  const { isEnabled: isDraftMode } = await draftMode();
+  const payload = await getPayloadClient();
+  const projects = await payload.find({
+    collection: "projects",
+    draft: isDraftMode,
+    where: {
+      slug: {
+        equals: slug,
+      },
+    },
+    limit: 1,
+  });
+  return projects.docs[0] || null;
+}
+
+// Helper to get all projects (for static params)
+export async function getAllProjects() {
+  const payload = await getPayloadClient();
+  const projects = await payload.find({
+    collection: "projects",
+    limit: 100,
+  });
+  return projects.docs;
+}
+

@@ -1,5 +1,5 @@
 import { buildConfig } from "payload";
-import { sqliteAdapter } from "@payloadcms/db-sqlite";
+import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 import path from "path";
@@ -39,6 +39,28 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname, ".."),
     },
+    livePreview: {
+      breakpoints: [
+        {
+          label: 'Mobile',
+          name: 'mobile',
+          width: 375,
+          height: 667,
+        },
+        {
+          label: 'Tablet',
+          name: 'tablet',
+          width: 768,
+          height: 1024,
+        },
+        {
+          label: 'Desktop',
+          name: 'desktop',
+          width: 1440,
+          height: 900,
+        },
+      ],
+    },
   },
   collections: [Users, Media, Pages, Services, Projects, Testimonials],
   globals: [Settings, Header, Footer],
@@ -49,15 +71,19 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, "payload-types.ts"),
   },
-  db: sqliteAdapter({
-    client: {
-      url: process.env.DATABASE_URI || "file:./pilow.db",
+  db: postgresAdapter({
+    pool: {
+      connectionString: process.env.POSTGRES_URL || process.env.DATABASE_URI || '',
     },
   }),
   onInit: async (payload) => {
-    // Seed content if needed
+    // Only seed in development - skip on Vercel/production
+    if (process.env.VERCEL || process.env.NODE_ENV === 'production') {
+      return;
+    }
+    
+    // Seed content if needed (development only)
     try {
-      // Dynamically import to avoid build issues if seed.ts uses node-only modules
       const { seed } = await import('../lib/seed');
       await seed(payload);
     } catch (error) {

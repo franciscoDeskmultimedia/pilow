@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Header, { HeaderProps } from "@/components/Header";
 import Footer, { FooterProps } from "@/components/Footer";
-import BlockRenderer from "@/components/BlockRenderer";
+import LiveContent from "@/components/LiveContent";
 import { getPageBySlug, getAllPages, getServices, getProjects, getTestimonials, getHeader, getFooter } from "@/lib/payload";
 
 interface PageProps {
@@ -116,8 +116,8 @@ export default async function Page({ params }: PageProps) {
       <Header {...(header as unknown as HeaderProps)} />
       <main id="main-content" role="main">
         {Array.isArray(page.layout) && page.layout.length > 0 ? (
-          <BlockRenderer
-            blocks={page.layout as never}
+          <LiveContent
+            page={page}
             services={services}
             projects={projects}
             testimonials={testimonials}

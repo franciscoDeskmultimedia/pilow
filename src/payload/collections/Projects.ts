@@ -6,6 +6,15 @@ export const Projects: CollectionConfig = {
     useAsTitle: "title",
     group: "Content",
     defaultColumns: ["title", "category", "featured", "updatedAt"],
+    livePreview: {
+      url: ({ data }) => {
+        const path = data?.slug ? `projects/${data.slug}` : 'projects';
+        return `${process.env.NEXT_PUBLIC_APP_URL || ''}/${path}`;
+      },
+    },
+  },
+  versions: {
+    drafts: true,
   },
   access: {
     read: () => true,

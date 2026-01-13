@@ -143,9 +143,9 @@ export default function Footer({ logo, copyright, socialLinks, navItems }: Foote
             <ul className="space-y-3">
               {serviceLinks.map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-white/60 hover:text-white transition-colors text-sm">
+                  <a href={link.href} className="text-white/60 hover:text-white transition-colors text-sm">
                     {link.label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -157,9 +157,9 @@ export default function Footer({ logo, copyright, socialLinks, navItems }: Foote
             <ul className="space-y-3">
               {companyLinks.map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-white/60 hover:text-white transition-colors text-sm">
+                  <a href={link.href} className="text-white/60 hover:text-white transition-colors text-sm">
                     {link.label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>

@@ -2,7 +2,6 @@
 
 import { useLivePreview } from "@payloadcms/live-preview-react";
 import Image from "next/image";
-import Link from "next/link";
 import { RichText } from "@payloadcms/richtext-lexical/react";
 import Header, { HeaderProps } from "@/components/Header";
 import Footer, { FooterProps } from "@/components/Footer";
@@ -84,7 +83,7 @@ export default function ProjectTemplate({ project: initialProject, header, foote
 
                 {project.projectUrl && (
                   <div>
-                    <Link 
+                    <a
                       href={project.projectUrl}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -94,7 +93,7 @@ export default function ProjectTemplate({ project: initialProject, header, foote
                       <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                       </svg>
-                    </Link>
+                    </a>
                   </div>
                 )}
               </div>

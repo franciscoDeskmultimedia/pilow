@@ -34,6 +34,13 @@ function transformProjects(docs: PayloadDoc[]) {
     description: String(doc.description || ""),
     tags: Array.isArray(doc.tags) ? doc.tags : [],
     projectUrl: doc.projectUrl as string | undefined,
+    slug: String(doc.slug || ""),
+    featuredImage: doc.featuredImage && typeof doc.featuredImage === 'object' && 'url' in doc.featuredImage
+      ? {
+          url: (doc.featuredImage as { url: string }).url,
+          alt: (doc.featuredImage as { alt?: string }).alt || String(doc.title || ""),
+        }
+      : undefined,
   }));
 }
 

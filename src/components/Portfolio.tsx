@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
+import { Link } from "@/i18n/routing";
+import Image from "next/image";
 
 const defaultProjects = [
   { id: "1", title: "TechFlow SaaS Platform", category: "web-application", description: "A comprehensive SaaS platform for workflow automation.", tags: [{ tag: "Next.js" }, { tag: "TypeScript" }, { tag: "Supabase" }] },
@@ -32,6 +34,7 @@ interface Project {
   tags: ProjectTag[];
   projectUrl?: string;
   featuredImage?: { url: string; alt: string };
+  slug?: string;
 }
 
 interface PortfolioProps {
@@ -67,11 +70,37 @@ export default function Portfolio({ projects = defaultProjects }: PortfolioProps
           {filteredProjects.map((project, index) => (
             <motion.article key={project.id} layout initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }} transition={{ duration: 0.4, delay: index * 0.1 }} className="group relative bg-white dark:bg-pilow-slate-dark/30 rounded-2xl overflow-hidden shadow-lg card-hover">
               <div className="relative h-56 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-pilow-ocean to-pilow-slate flex items-center justify-center">
-                  <div className="text-white/20 text-6xl font-bold">{project.title.charAt(0)}</div>
-                </div>
-                <motion.div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black/50">
-                  <a href={project.projectUrl || "#"} className="px-6 py-3 bg-white dark:bg-slate-800 text-pilow-slate-dark dark:text-white font-medium rounded-full hover:bg-pilow-cyan dark:hover:bg-cyan-600 transition-colors" aria-label={`View ${project.title}`}>View Project</a>
+                {project.featuredImage ? (
+                  <Image
+                    src={project.featuredImage.url}
+                    alt={project.featuredImage.alt || project.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                ) : (
+                  <div className="absolute inset-0 bg-gradient-to-br from-pilow-ocean to-pilow-slate flex items-center justify-center">
+                    <div className="text-white/20 text-6xl font-bold">{project.title.charAt(0)}</div>
+                  </div>
+                )}
+                <motion.div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black/50 z-10">
+                  {project.slug ? (
+                     <Link 
+                       href={`/projects/${project.slug}`} 
+                       className="px-6 py-3 bg-white dark:bg-slate-800 text-pilow-slate-dark dark:text-white font-medium rounded-full hover:bg-pilow-cyan dark:hover:bg-cyan-600 transition-colors"
+                       aria-label={`View ${project.title}`}
+                     >
+                       View Project
+                     </Link>
+                   ) : (
+                     <a 
+                       href={project.projectUrl || "#"} 
+                       className="px-6 py-3 bg-white dark:bg-slate-800 text-pilow-slate-dark dark:text-white font-medium rounded-full hover:bg-pilow-cyan dark:hover:bg-cyan-600 transition-colors"
+                       aria-label={`View ${project.title}`}
+                     >
+                       View Project
+                     </a>
+                   )}
                 </motion.div>
               </div>
               <div className="p-6">

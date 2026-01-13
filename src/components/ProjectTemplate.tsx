@@ -8,6 +8,7 @@ import Header, { HeaderProps } from "@/components/Header";
 import Footer, { FooterProps } from "@/components/Footer";
 
 interface ProjectTemplateProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   project: any; // Using any for flexibility with Payload types
   header: HeaderProps;
   footer: FooterProps;
@@ -71,6 +72,7 @@ export default function ProjectTemplate({ project: initialProject, header, foote
                   <div className="mb-8">
                     <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Technologies</h4>
                     <div className="flex flex-wrap gap-2">
+                      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                       {project.tags.map((tagItem: any, i: number) => (
                         <span key={i} className="px-3 py-1 bg-gray-50 text-gray-700 text-sm rounded-lg border border-gray-100">
                           {tagItem.tag}
@@ -116,6 +118,7 @@ export default function ProjectTemplate({ project: initialProject, header, foote
             <div className="mt-20 max-w-6xl mx-auto">
               <h2 className="text-3xl font-bold text-gray-900 mb-10 text-center">Project Gallery</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                 {project.gallery.map((item: any, i: number) => (
                   item.image && typeof item.image === 'object' && item.image.url && (
                     <div key={i} className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 group">

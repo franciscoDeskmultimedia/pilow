@@ -200,7 +200,7 @@ export async function seed(payload: Payload) {
         const slug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
         
         // Remove imageFile from spread
-        const { imageFile, ...projectData } = project;
+        const { imageFile: _, ...projectData } = project; // eslint-disable-line @typescript-eslint/no-unused-vars
 
         await payload.create({
             collection: 'projects',

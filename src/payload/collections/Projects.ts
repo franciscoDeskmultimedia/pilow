@@ -18,7 +18,8 @@ export const Projects: CollectionConfig = {
 
         const path = data?.slug ? `projects/${data.slug}` : 'projects';
         const fullPath = `/${localeCode}/${path}`;
-        return `/api/draft?url=${encodeURIComponent(fullPath)}&secret=${process.env.PAYLOAD_SECRET}`;
+        const draftSecret = process.env.NEXT_PUBLIC_DRAFT_SECRET || process.env.PAYLOAD_SECRET;
+        return `/api/draft?url=${encodeURIComponent(fullPath)}&secret=${draftSecret}`;
       },
     },
   },

@@ -10,7 +10,11 @@ export async function GET(request: Request) {
   const secret = searchParams.get('secret')
   const url = searchParams.get('url')
 
-  if (secret !== process.env.PAYLOAD_SECRET) {
+  // Use a dedicated draft secret or fallback to PAYLOAD_SECRET (server-side only)
+  // Ideally use NEXT_PUBLIC_DRAFT_SECRET for client-server consistency
+  const expectedSecret = process.env.NEXT_PUBLIC_DRAFT_SECRET || process.env.PAYLOAD_SECRET;
+
+  if (!secret || secret !== expectedSecret) {
     return new Response('Invalid secret', { status: 401 })
   }
 

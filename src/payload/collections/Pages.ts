@@ -23,7 +23,9 @@ export const Pages: CollectionConfig = {
         const fullPath = `/${localeCode}${path === '/' ? '' : path}`;
         
         // Use relative URL to avoid port mismatches during dev
-        return `/api/draft?url=${encodeURIComponent(fullPath)}&secret=${process.env.PAYLOAD_SECRET}`;
+        // Ensure we use a public env var for the secret since this runs in the browser
+        const draftSecret = process.env.NEXT_PUBLIC_DRAFT_SECRET || process.env.PAYLOAD_SECRET; 
+        return `/api/draft?url=${encodeURIComponent(fullPath)}&secret=${draftSecret}`;
       },
     },
   },

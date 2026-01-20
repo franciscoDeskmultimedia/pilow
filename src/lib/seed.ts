@@ -351,11 +351,11 @@ export async function seed(payload: Payload) {
   // 5. Seed Globals
   if (logoId) {
     const header = await payload.findGlobal({ slug: 'header' });
-    if (!header.logo) {
+    if (!header.logo || !header.navItems || header.navItems.length === 0) {
       await payload.updateGlobal({
           slug: 'header',
           data: {
-              logo: logoId,
+              logo: logoId || header.logo, // Use existing logo if available
               navItems: [
                   { link: { type: 'custom', url: '/#services', label: 'Services' } },
                   { link: { type: 'custom', url: '/#portfolio', label: 'Portfolio' } },
@@ -369,16 +369,20 @@ export async function seed(payload: Payload) {
     }
 
     const footer = await payload.findGlobal({ slug: 'footer' });
-    if (!footer.logo) {
+    if (!footer.logo || !footer.navItems || footer.navItems.length === 0 || !footer.copyright) {
       await payload.updateGlobal({
         slug: 'footer',
         data: {
-            logo: logoId,
+            logo: logoId || footer.logo, // Use existing logo if available
             copyright: 'Pilow. All rights reserved.',
             socialLinks: [
                 { platform: 'twitter', url: '#' },
                 { platform: 'linkedin', url: '#' },
                 { platform: 'github', url: '#' }
+            ],
+            navItems: [
+                { link: { type: 'custom', url: '/privacy', label: 'Privacy Policy' } },
+                { link: { type: 'custom', url: '/terms', label: 'Terms of Service' } }
             ]
         }
       });

@@ -9,6 +9,15 @@ interface ContactProps {
   headline?: string;
   highlightedText?: string;
   description?: string;
+  formTitle?: string;
+  formDescription?: string;
+  showContactInfo?: boolean;
+  contactInfo?: {
+    email?: string;
+    phone?: string;
+    address?: string;
+    socialLinks?: { platform: string; url: string }[];
+  };
 }
 
 export default function Contact({
@@ -16,6 +25,10 @@ export default function Contact({
   headline = "Ready to Start Your Project?",
   highlightedText = "Project",
   description = "Let's discuss how we can help bring your vision to life.",
+  formTitle = "Let's Build Something Amazing",
+  formDescription,
+  showContactInfo = true,
+  contactInfo,
 }: ContactProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -59,6 +72,8 @@ export default function Contact({
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="bg-white dark:bg-pilow-slate-dark/50 rounded-2xl p-8 shadow-lg">
+                <h3 className="text-2xl font-bold text-pilow-slate-dark dark:text-white mb-2">{formTitle}</h3>
+                {formDescription && <p className="text-pilow-slate dark:text-gray-300 mb-6">{formDescription}</p>}
                 <div className="grid sm:grid-cols-2 gap-4 mb-4">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-pilow-slate-dark dark:text-white mb-2">Name *</label>
@@ -96,33 +111,45 @@ export default function Contact({
             )}
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, x: 30 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6, delay: 0.3 }} className="space-y-8">
-            <div className="bg-gradient-to-br from-pilow-ocean to-pilow-slate rounded-2xl p-8 text-white">
-              <h3 className="text-xl font-bold mb-6">Contact Information</h3>
-              <div className="space-y-4">
-                <a href="mailto:hello@pilow.dev" className="flex items-center gap-4 hover:text-pilow-cyan transition-colors">
-                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">📧</div>
-                  <div><div className="text-sm text-white/60">Email</div><div className="font-medium">hello@pilow.dev</div></div>
-                </a>
-                <a href="tel:+15551234567" className="flex items-center gap-4 hover:text-pilow-cyan transition-colors">
-                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">📞</div>
-                  <div><div className="text-sm text-white/60">Phone</div><div className="font-medium">+1 (555) 123-4567</div></div>
-                </a>
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">📍</div>
-                  <div><div className="text-sm text-white/60">Location</div><div className="font-medium">San Francisco, CA</div></div>
+          {showContactInfo && (
+            <motion.div initial={{ opacity: 0, x: 30 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6, delay: 0.3 }} className="space-y-8">
+              <div className="bg-gradient-to-br from-pilow-ocean to-pilow-slate rounded-2xl p-8 text-white">
+                <h3 className="text-xl font-bold mb-6">Contact Information</h3>
+                <div className="space-y-4">
+                  {contactInfo?.email && (
+                    <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-4 hover:text-pilow-cyan transition-colors">
+                      <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">📧</div>
+                      <div><div className="text-sm text-white/60">Email</div><div className="font-medium">{contactInfo.email}</div></div>
+                    </a>
+                  )}
+                  {contactInfo?.phone && (
+                    <a href={`tel:${contactInfo.phone.replace(/[^0-9+]/g, '')}`} className="flex items-center gap-4 hover:text-pilow-cyan transition-colors">
+                      <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">📞</div>
+                      <div><div className="text-sm text-white/60">Phone</div><div className="font-medium">{contactInfo.phone}</div></div>
+                    </a>
+                  )}
+                  {contactInfo?.address && (
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">📍</div>
+                      <div><div className="text-sm text-white/60">Location</div><div className="font-medium">{contactInfo.address}</div></div>
+                    </div>
+                  )}
                 </div>
+                {contactInfo?.socialLinks && contactInfo.socialLinks.length > 0 && (
+                  <div className="mt-8 pt-6 border-t border-white/20">
+                    <p className="text-sm text-white/60 mb-4">Follow us</p>
+                    <div className="flex gap-3">
+                      {contactInfo.socialLinks.map((link, i) => (
+                        <a key={i} href={link.url} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-sm font-medium hover:bg-white/20 transition-colors">
+                          {link.platform.substring(0, 2).toUpperCase()}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
-              <div className="mt-8 pt-6 border-t border-white/20">
-                <p className="text-sm text-white/60 mb-4">Follow us</p>
-                <div className="flex gap-3">
-                  {["X", "in", "GH", "Dr"].map((icon) => (
-                    <a key={icon} href="#" className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-sm font-medium hover:bg-white/20 transition-colors">{icon}</a>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          )}
         </div>
       </div>
     </section>

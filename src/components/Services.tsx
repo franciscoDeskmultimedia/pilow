@@ -71,20 +71,36 @@ interface Service {
 }
 
 interface ServicesProps {
+  badge?: string;
+  headline?: string;
+  highlightedText?: string;
+  description?: string;
   services?: Service[];
 }
 
-export default function Services({ services = defaultServices }: ServicesProps) {
+export default function Services({ 
+  badge = "What We Do",
+  headline = "Services That Drive Results",
+  highlightedText = "Results",
+  description = "From concept to deployment, we offer comprehensive web development services tailored to your unique business needs.",
+  services = defaultServices 
+}: ServicesProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const headlineParts = headline.split(highlightedText);
 
   return (
     <section id="services" className="section bg-gradient-to-b from-white to-pilow-lavender-light dark:from-[#0f1419] dark:to-pilow-slate-dark/20" aria-labelledby="services-title">
       <div className="container">
         <motion.div ref={ref} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="text-center mb-16">
-          <span className="inline-block px-4 py-2 rounded-full bg-pilow-ocean/10 text-pilow-ocean text-sm font-medium mb-4">What We Do</span>
-          <h2 id="services-title" className="section-title">Services That Drive <span className="gradient-text">Results</span></h2>
-          <p className="section-subtitle">From concept to deployment, we offer comprehensive web development services tailored to your unique business needs.</p>
+          <span className="inline-block px-4 py-2 rounded-full bg-pilow-ocean/10 text-pilow-ocean text-sm font-medium mb-4">{badge}</span>
+          <h2 id="services-title" className="section-title">
+            {headlineParts.length > 1 ? (
+              <>{headlineParts[0]}<span className="gradient-text">{highlightedText}</span>{headlineParts[1]}</>
+            ) : headline}
+          </h2>
+          <p className="section-subtitle">{description}</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

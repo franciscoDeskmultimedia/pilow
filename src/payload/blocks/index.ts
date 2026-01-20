@@ -161,6 +161,7 @@ export const AboutBlock: Block = {
     { name: "badge", type: "text", defaultValue: "About Us", localized: true },
     { name: "headline", type: "text", defaultValue: "Passionate About Building the Future of Web", localized: true },
     { name: "highlightedText", type: "text", defaultValue: "Future of Web", localized: true },
+    { name: "description", type: "textarea", localized: true },
     { name: "content", type: "richText", localized: true },
     {
       name: "values",
@@ -243,6 +244,26 @@ export const ContactBlock: Block = {
       type: "checkbox",
       label: "Show Contact Information",
       defaultValue: true,
+    },
+    {
+      name: "contactInfo",
+      type: "group",
+      admin: {
+        condition: (_, siblingData) => siblingData?.showContactInfo,
+      },
+      fields: [
+        { name: "email", type: "text", defaultValue: "hello@pilow.dev", localized: true },
+        { name: "phone", type: "text", defaultValue: "+1 (555) 123-4567", localized: true },
+        { name: "address", type: "textarea", defaultValue: "San Francisco, CA", localized: true },
+        {
+          name: "socialLinks",
+          type: "array",
+          fields: [
+             { name: "platform", type: "text", required: true },
+             { name: "url", type: "text", required: true },
+          ],
+        },
+      ],
     },
   ],
 };

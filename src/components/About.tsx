@@ -1,8 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { RichText } from "@payloadcms/richtext-lexical/react";
 
 const iconMap: Record<string, string> = {
   lightbulb: "💡",
@@ -32,6 +32,9 @@ interface AboutProps {
   badge?: string;
   headline?: string;
   highlightedText?: string;
+  description?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  content?: any;
   values?: AboutValue[];
   stats?: AboutStat[];
 }
@@ -40,6 +43,8 @@ export default function About({
   badge = "About Us",
   headline = "Passionate About Building the Future of Web",
   highlightedText = "Future of Web",
+  description = "Pilow was founded with a simple mission: to help businesses succeed in the digital world through exceptional web development.",
+  content,
   values = defaultValues,
   stats = defaultStats,
 }: AboutProps) {
@@ -59,9 +64,10 @@ export default function About({
                 <>{headlineParts[0]}<span className="gradient-text">{highlightedText}</span>{headlineParts[1]}</>
               ) : headline}
             </h2>
-            <p className="text-lg text-pilow-slate dark:text-gray-300 mb-6 leading-relaxed">
-              Pilow was founded with a simple mission: to help businesses succeed in the digital world through exceptional web development.
-            </p>
+            <div className="text-lg text-pilow-slate dark:text-gray-300 mb-6 leading-relaxed">
+              <p className="mb-4">{description}</p>
+              {content && <RichText data={content} />}
+            </div>
 
             <div className="grid sm:grid-cols-2 gap-6">
               {values.map((value, index) => (

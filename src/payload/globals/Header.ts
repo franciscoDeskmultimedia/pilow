@@ -46,6 +46,7 @@ export const Header: GlobalConfig = {
               name: "url",
               type: "text",
               required: true,
+              localized: true,
               admin: {
                 condition: (_, siblingData) => siblingData?.type === "custom",
               },
@@ -54,6 +55,7 @@ export const Header: GlobalConfig = {
               name: "label",
               type: "text",
               required: true,
+              localized: true,
             },
           ],
         },

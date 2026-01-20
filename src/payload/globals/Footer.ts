@@ -12,6 +12,7 @@ export const Footer: GlobalConfig = {
       name: "copyright",
       type: "text",
       defaultValue: "All rights reserved.",
+      localized: true,
     },
     {
         name: "socialLinks",
@@ -72,6 +73,7 @@ export const Footer: GlobalConfig = {
               name: "url",
               type: "text",
               required: true,
+              localized: true,
               admin: {
                 condition: (_, siblingData) => siblingData?.type === "custom",
               },
@@ -80,6 +82,7 @@ export const Footer: GlobalConfig = {
               name: "label",
               type: "text",
               required: true,
+              localized: true,
             },
           ],
         },

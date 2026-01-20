@@ -58,10 +58,31 @@ export default function BlockRenderer({ blocks, services, projects, testimonials
                   ...(s as object),
                 }))
               : services;
-            return <Services key={key} services={serviceData as never} />;
+            return (
+              <Services
+                key={key}
+                badge={block.badge as string}
+                headline={block.headline as string}
+                highlightedText={block.highlightedText as string}
+                description={block.description as string}
+                services={serviceData as never}
+              />
+            );
 
           case "portfolio":
-            return <Portfolio key={key} projects={projects as never} />;
+            return (
+              <Portfolio
+                key={key}
+                badge={block.badge as string}
+                headline={block.headline as string}
+                highlightedText={block.highlightedText as string}
+                description={block.description as string}
+                showFilters={block.showFilters as boolean}
+                featuredOnly={block.featuredOnly as boolean}
+                maxProjects={block.maxItems as number}
+                projects={projects as never}
+              />
+            );
 
           case "about":
             return (
@@ -70,13 +91,25 @@ export default function BlockRenderer({ blocks, services, projects, testimonials
                 badge={block.badge as string}
                 headline={block.headline as string}
                 highlightedText={block.highlightedText as string}
+                description={block.description as string}
+                content={block.content}
                 values={block.values as never}
                 stats={block.stats as never}
               />
             );
 
           case "testimonials":
-            return <Testimonials key={key} testimonials={testimonials as never} />;
+            return (
+              <Testimonials 
+                key={key} 
+                testimonials={testimonials as never}
+                badge={block.badge as string}
+                headline={block.headline as string}
+                highlightedText={block.highlightedText as string}
+                description={block.description as string}
+                featuredOnly={block.featuredOnly as boolean}
+              />
+            );
 
           case "contact":
             return (
@@ -86,6 +119,10 @@ export default function BlockRenderer({ blocks, services, projects, testimonials
                 headline={block.headline as string}
                 highlightedText={block.highlightedText as string}
                 description={block.description as string}
+                formTitle={block.formTitle as string}
+                formDescription={block.formDescription as string}
+                showContactInfo={block.showContactInfo as boolean}
+                contactInfo={block.contactInfo as never}
               />
             );
 

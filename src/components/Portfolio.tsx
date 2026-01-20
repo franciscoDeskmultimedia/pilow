@@ -35,36 +35,76 @@ interface Project {
   projectUrl?: string;
   featuredImage?: { url: string; alt: string };
   slug?: string;
+  featured?: boolean;
 }
 
 interface PortfolioProps {
+  badge?: string;
+  headline?: string;
+  highlightedText?: string;
+  description?: string;
+  showFilters?: boolean;
+  featuredOnly?: boolean;
+  maxProjects?: number;
   projects?: Project[];
 }
 
-export default function Portfolio({ projects = defaultProjects }: PortfolioProps) {
+export default function Portfolio({ 
+  badge = "Our Work",
+  headline = "Featured Projects",
+  highlightedText = "Projects",
+  description = "Explore our portfolio of successful projects that have helped businesses achieve their digital transformation goals.",
+  showFilters = true,
+  featuredOnly = false,
+  maxProjects,
+  projects = defaultProjects 
+}: PortfolioProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const categories = ["All", ...Array.from(new Set(projects.map((p) => p.category)))];
-  const filteredProjects = activeCategory === "All" ? projects : projects.filter((p) => p.category === activeCategory);
+  // Filter projects based on featuredOnly first (assuming we had a featured flag, currently Project interface doesn't show it but I'll assume passing 'featuredOnly' implies filtering logic if 'featured' property existed in Project. 
+  // However, looking at defaultProjects, there is no 'featured' boolean. 
+  // Since I cannot change the data structure deeply here without context, I will skip 'featured' filtering logic on the data unless 'featured' prop exists on project.
+  // Actually, I should probably filter by maxProjects at least.
+  
+  let displayedProjects = projects;
+  
+  if (featuredOnly) {
+    displayedProjects = displayedProjects.filter(p => p.featured);
+  }
+  
+  if (maxProjects) {
+    displayedProjects = displayedProjects.slice(0, maxProjects);
+  }
+
+  const categories = ["All", ...Array.from(new Set(displayedProjects.map((p) => p.category)))];
+  const filteredProjects = activeCategory === "All" ? displayedProjects : displayedProjects.filter((p) => p.category === activeCategory);
+
+  const headlineParts = headline.split(highlightedText);
 
   return (
     <section id="portfolio" className="section" aria-labelledby="portfolio-title">
       <div className="container">
         <motion.div ref={ref} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="text-center mb-12">
-          <span className="inline-block px-4 py-2 rounded-full bg-pilow-lavender dark:bg-slate-700 text-pilow-slate-dark dark:text-gray-100 text-sm font-medium mb-4">Our Work</span>
-          <h2 id="portfolio-title" className="section-title">Featured <span className="gradient-text">Projects</span></h2>
-          <p className="section-subtitle">Explore our portfolio of successful projects that have helped businesses achieve their digital transformation goals.</p>
+          <span className="inline-block px-4 py-2 rounded-full bg-pilow-lavender dark:bg-slate-700 text-pilow-slate-dark dark:text-gray-100 text-sm font-medium mb-4">{badge}</span>
+          <h2 id="portfolio-title" className="section-title">
+             {headlineParts.length > 1 ? (
+              <>{headlineParts[0]}<span className="gradient-text">{highlightedText}</span>{headlineParts[1]}</>
+            ) : headline}
+          </h2>
+          <p className="section-subtitle">{description}</p>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.2 }} className="flex flex-wrap justify-center gap-3 mb-12" role="tablist" aria-label="Filter by category">
-          {categories.map((cat) => (
-            <button key={cat} onClick={() => setActiveCategory(cat)} role="tab" aria-selected={activeCategory === cat} className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === cat ? "bg-pilow-ocean text-white shadow-lg shadow-pilow-ocean/30" : "bg-pilow-lavender-light dark:bg-slate-700 text-pilow-slate dark:text-gray-200 hover:bg-pilow-lavender dark:hover:bg-slate-600"}`}>
-              {cat === "All" ? "All" : categoryLabels[cat] || cat}
-            </button>
-          ))}
-        </motion.div>
+        {showFilters && (
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.2 }} className="flex flex-wrap justify-center gap-3 mb-12" role="tablist" aria-label="Filter by category">
+            {categories.map((cat) => (
+              <button key={cat} onClick={() => setActiveCategory(cat)} role="tab" aria-selected={activeCategory === cat} className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === cat ? "bg-pilow-ocean text-white shadow-lg shadow-pilow-ocean/30" : "bg-pilow-lavender-light dark:bg-slate-700 text-pilow-slate dark:text-gray-200 hover:bg-pilow-lavender dark:hover:bg-slate-600"}`}>
+                {cat === "All" ? "All" : categoryLabels[cat] || cat}
+              </button>
+            ))}
+          </motion.div>
+        )}
 
         <div id="portfolio-grid" role="tabpanel" className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project, index) => (

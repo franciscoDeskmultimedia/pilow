@@ -38,6 +38,7 @@ export default function BlockRenderer({ blocks, services, projects, testimonials
             return (
               <Hero
                 key={key}
+                id={block.anchorId as string}
                 badge={block.badge as string}
                 headline={block.headline as string}
                 highlightedText={block.highlightedText as string}
@@ -61,6 +62,7 @@ export default function BlockRenderer({ blocks, services, projects, testimonials
             return (
               <Services
                 key={key}
+                id={block.anchorId as string}
                 badge={block.badge as string}
                 headline={block.headline as string}
                 highlightedText={block.highlightedText as string}
@@ -73,6 +75,7 @@ export default function BlockRenderer({ blocks, services, projects, testimonials
             return (
               <Portfolio
                 key={key}
+                id={block.anchorId as string}
                 badge={block.badge as string}
                 headline={block.headline as string}
                 highlightedText={block.highlightedText as string}
@@ -88,6 +91,7 @@ export default function BlockRenderer({ blocks, services, projects, testimonials
             return (
               <About
                 key={key}
+                id={block.anchorId as string}
                 badge={block.badge as string}
                 headline={block.headline as string}
                 highlightedText={block.highlightedText as string}
@@ -102,6 +106,7 @@ export default function BlockRenderer({ blocks, services, projects, testimonials
             return (
               <Testimonials 
                 key={key} 
+                id={block.anchorId as string}
                 testimonials={testimonials as never}
                 badge={block.badge as string}
                 headline={block.headline as string}
@@ -115,6 +120,7 @@ export default function BlockRenderer({ blocks, services, projects, testimonials
             return (
               <Contact
                 key={key}
+                id={block.anchorId as string}
                 badge={block.badge as string}
                 headline={block.headline as string}
                 highlightedText={block.highlightedText as string}

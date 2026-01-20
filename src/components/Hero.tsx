@@ -9,6 +9,7 @@ interface HeroStat {
 }
 
 interface HeroProps {
+  id?: string;
   badge?: string;
   headline?: string;
   highlightedText?: string;
@@ -38,6 +39,7 @@ const defaultProps: HeroProps = {
 
 export default function Hero(props: HeroProps = {}) {
   const {
+    id = "hero",
     badge = defaultProps.badge,
     headline = defaultProps.headline,
     highlightedText = defaultProps.highlightedText,
@@ -53,7 +55,7 @@ export default function Hero(props: HeroProps = {}) {
   const headlineParts = headline?.split(highlightedText || "") || [headline];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20" aria-labelledby="hero-title">
+    <section id={id} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20" aria-labelledby="hero-title">
       {/* Animated Background Blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
         <div className="blob blob-1" />

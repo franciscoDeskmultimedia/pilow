@@ -29,6 +29,7 @@ interface AboutValue { title: string; description: string; icon?: string; }
 interface AboutStat { value: string; label: string; }
 
 interface AboutProps {
+  id?: string;
   badge?: string;
   headline?: string;
   highlightedText?: string;
@@ -40,6 +41,7 @@ interface AboutProps {
 }
 
 export default function About({
+  id = "about",
   badge = "About Us",
   headline = "Passionate About Building the Future of Web",
   highlightedText = "Future of Web",
@@ -54,7 +56,7 @@ export default function About({
   const headlineParts = headline.split(highlightedText);
 
   return (
-    <section id="about" className="section bg-gradient-to-b from-pilow-lavender-light to-white dark:from-pilow-slate-dark/20 dark:to-[#0f1419]" aria-labelledby="about-title">
+    <section id={id} className="section bg-gradient-to-b from-pilow-lavender-light to-white dark:from-pilow-slate-dark/20 dark:to-[#0f1419]" aria-labelledby="about-title">
       <div className="container">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div ref={ref} initial={{ opacity: 0, x: -30 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6 }}>

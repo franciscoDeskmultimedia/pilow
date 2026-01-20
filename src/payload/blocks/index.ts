@@ -14,6 +14,14 @@ export const HeroBlock: Block = {
       localized: true,
     },
     {
+      name: "anchorId",
+      type: "text",
+      label: "Anchor ID (for menu links)",
+      admin: {
+        description: "e.g., 'hero' for #hero link",
+      },
+    },
+    {
       name: "headline",
       type: "text",
       required: true,
@@ -76,6 +84,14 @@ export const ServicesBlock: Block = {
   },
   fields: [
     { name: "badge", type: "text", defaultValue: "What We Do", localized: true },
+    {
+      name: "anchorId",
+      type: "text",
+      label: "Anchor ID (for menu links)",
+      admin: {
+        description: "e.g., 'services' for #services link",
+      },
+    },
     { name: "headline", type: "text", defaultValue: "Services That Drive Results", localized: true },
     { name: "highlightedText", type: "text", defaultValue: "Results", localized: true },
     { name: "description", type: "textarea", localized: true },
@@ -127,6 +143,14 @@ export const PortfolioBlock: Block = {
   },
   fields: [
     { name: "badge", type: "text", defaultValue: "Our Work", localized: true },
+    {
+      name: "anchorId",
+      type: "text",
+      label: "Anchor ID (for menu links)",
+      admin: {
+        description: "e.g., 'portfolio' for #portfolio link",
+      },
+    },
     { name: "headline", type: "text", defaultValue: "Featured Projects", localized: true },
     { name: "highlightedText", type: "text", defaultValue: "Projects", localized: true },
     { name: "description", type: "textarea", localized: true },
@@ -159,6 +183,14 @@ export const AboutBlock: Block = {
   },
   fields: [
     { name: "badge", type: "text", defaultValue: "About Us", localized: true },
+    {
+      name: "anchorId",
+      type: "text",
+      label: "Anchor ID (for menu links)",
+      admin: {
+        description: "e.g., 'about' for #about link",
+      },
+    },
     { name: "headline", type: "text", defaultValue: "Passionate About Building the Future of Web", localized: true },
     { name: "highlightedText", type: "text", defaultValue: "Future of Web", localized: true },
     { name: "description", type: "textarea", localized: true },
@@ -202,6 +234,14 @@ export const TestimonialsBlock: Block = {
   },
   fields: [
     { name: "badge", type: "text", defaultValue: "Testimonials", localized: true },
+    {
+      name: "anchorId",
+      type: "text",
+      label: "Anchor ID (for menu links)",
+      admin: {
+        description: "e.g., 'testimonials' for #testimonials link",
+      },
+    },
     { name: "headline", type: "text", defaultValue: "What Our Clients Say", localized: true },
     { name: "highlightedText", type: "text", defaultValue: "Clients", localized: true },
     { name: "description", type: "textarea", localized: true },
@@ -234,6 +274,14 @@ export const ContactBlock: Block = {
   },
   fields: [
     { name: "badge", type: "text", defaultValue: "Get in Touch", localized: true },
+    {
+      name: "anchorId",
+      type: "text",
+      label: "Anchor ID (for menu links)",
+      admin: {
+        description: "e.g., 'contact' for #contact link",
+      },
+    },
     { name: "headline", type: "text", defaultValue: "Ready to Start Your Project?", localized: true },
     { name: "highlightedText", type: "text", defaultValue: "Project", localized: true },
     { name: "description", type: "textarea", localized: true },

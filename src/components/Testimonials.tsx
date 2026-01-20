@@ -23,6 +23,7 @@ interface Testimonial {
 }
 
 interface TestimonialsProps {
+  id?: string;
   badge?: string;
   headline?: string;
   highlightedText?: string;
@@ -32,6 +33,7 @@ interface TestimonialsProps {
 }
 
 export default function Testimonials({
+  id = "testimonials",
   badge = "Testimonials",
   headline = "What Our Clients Say",
   highlightedText = "Clients",
@@ -54,7 +56,7 @@ export default function Testimonials({
   const headlineParts = headline.split(highlightedText);
 
   return (
-    <section id="testimonials" className="section bg-gradient-to-br from-pilow-slate to-pilow-slate-dark text-white overflow-hidden" aria-labelledby="testimonials-title">
+    <section id={id} className="section bg-gradient-to-br from-pilow-slate to-pilow-slate-dark text-white overflow-hidden" aria-labelledby="testimonials-title">
       <div className="absolute inset-0 opacity-10" aria-hidden="true">
         <div className="absolute top-0 left-0 w-96 h-96 bg-pilow-cyan rounded-full filter blur-3xl" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-pilow-lavender rounded-full filter blur-3xl" />

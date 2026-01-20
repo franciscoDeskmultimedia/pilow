@@ -39,6 +39,7 @@ interface Project {
 }
 
 interface PortfolioProps {
+  id?: string;
   badge?: string;
   headline?: string;
   highlightedText?: string;
@@ -50,6 +51,7 @@ interface PortfolioProps {
 }
 
 export default function Portfolio({ 
+  id = "portfolio",
   badge = "Our Work",
   headline = "Featured Projects",
   highlightedText = "Projects",
@@ -84,7 +86,7 @@ export default function Portfolio({
   const headlineParts = headline.split(highlightedText);
 
   return (
-    <section id="portfolio" className="section" aria-labelledby="portfolio-title">
+    <section id={id} className="section" aria-labelledby="portfolio-title">
       <div className="container">
         <motion.div ref={ref} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="text-center mb-12">
           <span className="inline-block px-4 py-2 rounded-full bg-pilow-lavender dark:bg-slate-700 text-pilow-slate-dark dark:text-gray-100 text-sm font-medium mb-4">{badge}</span>

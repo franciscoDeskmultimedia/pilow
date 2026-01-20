@@ -71,6 +71,7 @@ interface Service {
 }
 
 interface ServicesProps {
+  id?: string;
   badge?: string;
   headline?: string;
   highlightedText?: string;
@@ -79,6 +80,7 @@ interface ServicesProps {
 }
 
 export default function Services({ 
+  id = "services",
   badge = "What We Do",
   headline = "Services That Drive Results",
   highlightedText = "Results",
@@ -91,7 +93,7 @@ export default function Services({
   const headlineParts = headline.split(highlightedText);
 
   return (
-    <section id="services" className="section bg-gradient-to-b from-white to-pilow-lavender-light dark:from-[#0f1419] dark:to-pilow-slate-dark/20" aria-labelledby="services-title">
+    <section id={id} className="section bg-gradient-to-b from-white to-pilow-lavender-light dark:from-[#0f1419] dark:to-pilow-slate-dark/20" aria-labelledby="services-title">
       <div className="container">
         <motion.div ref={ref} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="text-center mb-16">
           <span className="inline-block px-4 py-2 rounded-full bg-pilow-ocean/10 text-pilow-ocean text-sm font-medium mb-4">{badge}</span>

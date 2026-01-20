@@ -87,12 +87,16 @@ export default buildConfig({
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "pilow-dev-secret-change-in-production",
   cors: [
-    process.env.NEXT_PUBLIC_SERVER_URL || '', 
+    process.env.NEXT_PUBLIC_SERVER_URL || '',
+    process.env.NEXT_PUBLIC_APP_URL || '', 
+    'https://pilow.vercel.app',
     'http://localhost:3000', 
     'http://localhost:3001'
   ].filter(Boolean),
   csrf: [
-    process.env.NEXT_PUBLIC_SERVER_URL || '', 
+    process.env.NEXT_PUBLIC_SERVER_URL || '',
+    process.env.NEXT_PUBLIC_APP_URL || '', 
+    'https://pilow.vercel.app',
     'http://localhost:3000', 
     'http://localhost:3001'
   ].filter(Boolean),

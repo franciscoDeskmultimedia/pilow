@@ -16,7 +16,7 @@ interface ProjectTemplateProps {
 export default function ProjectTemplate({ project: initialProject, header, footer }: ProjectTemplateProps) {
   const { data: project } = useLivePreview({
     initialData: initialProject,
-    serverURL: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
+    serverURL: process.env.NEXT_PUBLIC_SERVER_URL || process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
     depth: 2,
   });
 

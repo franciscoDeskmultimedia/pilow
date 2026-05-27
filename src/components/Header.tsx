@@ -100,7 +100,7 @@ export default function Header({ logo, navItems }: HeaderProps) {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "glass py-3 shadow-lg" : "py-5"
+        isScrolled ? "bg-white/95 dark:bg-slate-900/95 backdrop-blur-md py-3 shadow-lg border-b border-slate-200/50 dark:border-slate-800/50" : "py-5"
       }`}
       role="banner"
     >
@@ -142,10 +142,10 @@ export default function Header({ logo, navItems }: HeaderProps) {
             <li key={link.label}>
               <a
                 href={link.href}
-                className="text-sm font-medium text-pilow-slate hover:text-pilow-ocean transition-colors relative group dark:text-gray-300 dark:hover:text-pilow-cyan"
+                className="text-sm font-medium text-slate-800 hover:text-pilow-ocean-dark transition-colors relative group dark:text-slate-200 dark:hover:text-cyan-400"
               >
                 {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-pilow-ocean transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-pilow-ocean-dark dark:bg-cyan-400 transition-all duration-300 group-hover:w-full" />
               </a>
             </li>
           ))}
@@ -251,7 +251,7 @@ export default function Header({ logo, navItems }: HeaderProps) {
                   >
                     <a
                       href={link.href}
-                      className="text-2xl font-medium text-pilow-slate dark:text-gray-200 hover:text-pilow-ocean transition-colors"
+                      className="text-2xl font-medium text-slate-800 dark:text-slate-200 hover:text-pilow-ocean-dark dark:hover:text-cyan-400 transition-colors"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {link.label}

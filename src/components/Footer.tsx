@@ -87,7 +87,7 @@ export default function Footer({ logo, copyright, socialLinks, navItems }: Foote
   })) || defaultSocialLinks;
 
   return (
-    <footer className="bg-pilow-slate-dark text-white py-16" role="contentinfo">
+    <footer className="bg-slate-900 dark:bg-slate-950 text-white py-16" role="contentinfo">
       {/* CTA Section */}
       <div className="border-b border-white/10">
         <div className="container py-16">
@@ -108,7 +108,7 @@ export default function Footer({ logo, copyright, socialLinks, navItems }: Foote
       </div>
 
       {/* Main Footer */}
-      <div className="container py-16">
+      <div className="container py-24 md:py-28 mt-8 mb-10">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 lg:gap-12">
           {/* Brand */}
           <div className="col-span-2 md:col-span-4 lg:col-span-2">

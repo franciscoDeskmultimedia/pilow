@@ -96,7 +96,7 @@ export default function Services({
     <section id={id} className="section bg-gradient-to-b from-white to-pilow-lavender-light dark:from-[#0f1419] dark:to-pilow-slate-dark/20" aria-labelledby="services-title">
       <div className="container">
         <motion.div ref={ref} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="text-center mb-16">
-          <span className="inline-block px-4 py-2 rounded-full bg-pilow-ocean/10 text-pilow-ocean text-sm font-medium mb-4">{badge}</span>
+          <span className="inline-block px-4 py-2 rounded-full bg-pilow-ocean/10 text-pilow-ocean-dark dark:text-cyan-400 text-sm font-medium mb-4">{badge}</span>
           <h2 id="services-title" className="section-title">
             {headlineParts.length > 1 ? (
               <>{headlineParts[0]}<span className="gradient-text">{highlightedText}</span>{headlineParts[1]}</>
@@ -112,11 +112,11 @@ export default function Services({
                 {iconMap[service.icon] || iconMap.code}
               </div>
               <h3 className="text-xl font-bold text-pilow-slate-dark dark:text-white mb-3">{service.title}</h3>
-              <p className="text-pilow-slate dark:text-gray-300 mb-6 leading-relaxed">{service.description}</p>
+              <p className="text-pilow-slate-dark dark:text-gray-300 mb-6 leading-relaxed">{service.description}</p>
               <ul className="space-y-2" role="list">
-                {service.features.map((f) => (
-                  <li key={f.feature} className="flex items-center gap-2 text-sm text-pilow-slate dark:text-gray-400">
-                    <svg className="w-4 h-4 text-pilow-ocean flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                {service.features?.map((f) => (
+                  <li key={f.feature} className="flex items-center gap-2 text-sm text-pilow-slate-dark dark:text-gray-400">
+                    <svg className="w-4 h-4 text-pilow-ocean-dark dark:text-cyan-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     {f.feature}

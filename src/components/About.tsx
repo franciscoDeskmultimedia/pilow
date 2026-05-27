@@ -66,7 +66,7 @@ export default function About({
                 <>{headlineParts[0]}<span className="gradient-text">{highlightedText}</span>{headlineParts[1]}</>
               ) : headline}
             </h2>
-            <div className="text-lg text-pilow-slate dark:text-gray-300 mb-6 leading-relaxed">
+            <div className="text-lg text-pilow-slate-dark dark:text-gray-300 mb-6 leading-relaxed">
               <p className="mb-4">{description}</p>
               {content && <RichText data={content} />}
             </div>
@@ -79,7 +79,7 @@ export default function About({
                   </div>
                   <div>
                     <h3 className="font-semibold text-pilow-slate-dark dark:text-white mb-1">{value.title}</h3>
-                    <p className="text-sm text-pilow-slate dark:text-gray-400">{value.description}</p>
+                    <p className="text-sm text-pilow-slate-dark dark:text-gray-400">{value.description}</p>
                   </div>
                 </motion.div>
               ))}
@@ -94,8 +94,8 @@ export default function About({
                 <div className="grid grid-cols-2 gap-8 mb-8">
                   {stats.map((stat, index) => (
                     <motion.div key={stat.label} initial={{ opacity: 0, scale: 0.8 }} animate={isInView ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }} className="text-center p-4 bg-pilow-lavender-light dark:bg-slate-800 rounded-xl">
-                      <div className="text-3xl font-bold text-pilow-ocean dark:text-cyan-400">{stat.value}</div>
-                      <div className="text-sm text-pilow-slate dark:text-gray-300 mt-1">{stat.label}</div>
+                      <div className="text-3xl font-bold text-pilow-ocean-dark dark:text-cyan-400">{stat.value}</div>
+                      <div className="text-sm text-pilow-slate-dark dark:text-gray-300 mt-1">{stat.label}</div>
                     </motion.div>
                   ))}
                 </div>

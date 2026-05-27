@@ -19,6 +19,7 @@ interface Testimonial {
   role: string;
   company: string;
   rating: number;
+  featured?: boolean;
   avatar?: { url: string; alt: string };
 }
 
@@ -31,7 +32,6 @@ interface TestimonialsProps {
   featuredOnly?: boolean;
   testimonials?: Testimonial[];
 }
-
 export default function Testimonials({
   id = "testimonials",
   badge = "Testimonials",
@@ -45,18 +45,21 @@ export default function Testimonials({
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Filter testimonials if needed (assuming testmonial objects might have a 'featured' property in the future, 
-  // or based on specific logic. For now, we will use the testimonials array as is, 
-  // but if featuredOnly is passed and no filtering logic is apparent on the object, we just pass the list.
-  // Actually, let's assume if there's filtering it happens at the querying level or earlier.
-  // However, I will implement a basic filter if the property existed.
-  // Since I saw in previous steps that 'featured' is not in the default objects here, I will leave it as is for now.
-  const displayTestimonials = testimonials;
+  let displayTestimonials = testimonials;
+
+  if (featuredOnly) {
+    displayTestimonials = testimonials.filter((t) => t.featured);
+  }
+
+  // Fallback if no testimonials found after filtering
+  if (displayTestimonials.length === 0) {
+    return null;
+  }
 
   const headlineParts = headline.split(highlightedText);
 
   return (
-    <section id={id} className="section bg-gradient-to-br from-pilow-slate to-pilow-slate-dark text-white overflow-hidden" aria-labelledby="testimonials-title">
+    <section id={id} className="section bg-gradient-to-br from-pilow-slate-dark to-slate-900 text-white overflow-hidden" aria-labelledby="testimonials-title">
       <div className="absolute inset-0 opacity-10" aria-hidden="true">
         <div className="absolute top-0 left-0 w-96 h-96 bg-pilow-cyan rounded-full filter blur-3xl" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-pilow-lavender rounded-full filter blur-3xl" />
@@ -70,7 +73,7 @@ export default function Testimonials({
               <>{headlineParts[0]}<span className="text-pilow-cyan">{highlightedText}</span>{headlineParts[1]}</>
             ) : headline}
           </h2>
-          <p className="section-subtitle text-gray-300">{description}</p>
+          <p className="section-subtitle text-slate-100">{description}</p>
         </motion.div>
 
         <div className="max-w-4xl mx-auto">

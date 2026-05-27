@@ -35,6 +35,7 @@ function transformProjects(docs: PayloadDoc[]) {
     tags: Array.isArray(doc.tags) ? doc.tags : [],
     projectUrl: doc.projectUrl as string | undefined,
     slug: String(doc.slug || ""),
+    featured: Boolean(doc.featured),
     featuredImage: doc.featuredImage && typeof doc.featuredImage === 'object' && 'url' in doc.featuredImage
       ? {
           url: (doc.featuredImage as { url: string }).url,
@@ -52,6 +53,7 @@ function transformTestimonials(docs: PayloadDoc[]) {
     role: String(doc.role || ""),
     company: String(doc.company || ""),
     rating: Number(doc.rating) || 5,
+    featured: Boolean(doc.featured),
   }));
 }
 
@@ -80,8 +82,8 @@ export default async function Home({ params }: Props) {
     const [pageData, servicesData, projectsData, testimonialsData, headerData, footerData] = await Promise.all([
       getHomepagePage(payloadLocale).catch(() => null),
       getServices(payloadLocale).catch(() => []),
-      getProjects(true, payloadLocale).catch(() => []),
-      getTestimonials(true, payloadLocale).catch(() => []),
+      getProjects(undefined, payloadLocale).catch(() => []),
+      getTestimonials(undefined, payloadLocale).catch(() => []),
       getHeader(payloadLocale).catch(() => null),
       getFooter(payloadLocale).catch(() => null),
     ]);

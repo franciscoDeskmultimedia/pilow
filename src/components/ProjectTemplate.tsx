@@ -30,7 +30,7 @@ export default function ProjectTemplate({ project: initialProject, header, foote
           {/* Header Section */}
           <div className="max-w-4xl mx-auto text-center mb-12">
             {project.category && (
-              <span className="inline-block px-4 py-1 rounded-full bg-pilow-blue/10 dark:bg-pilow-ocean/20 text-pilow-blue dark:text-pilow-cyan text-sm font-semibold mb-6 capitalize">
+              <span className="inline-block px-4 py-1 rounded-full bg-pilow-ocean/10 dark:bg-pilow-ocean/20 text-pilow-ocean-dark dark:text-pilow-cyan text-sm font-semibold mb-6 capitalize">
                 {project.category.replace('-', ' ')}
               </span>
             )}
@@ -87,7 +87,7 @@ export default function ProjectTemplate({ project: initialProject, header, foote
                       href={project.projectUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center w-full bg-pilow-blue hover:bg-pilow-blue/90 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200"
+                      className="inline-flex items-center justify-center w-full bg-pilow-ocean-dark hover:bg-pilow-ocean text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200"
                     >
                       Visit Live Site
                       <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -70,8 +70,8 @@ export default function Hero(props: HeroProps = {}) {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-center lg:text-left">
-            <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.1 }} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pilow-lavender/50 text-pilow-slate-dark text-sm font-medium mb-6">
-              <span className="w-2 h-2 rounded-full bg-pilow-ocean animate-pulse" />
+            <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.1 }} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pilow-lavender/50 dark:bg-slate-800 text-pilow-slate-dark dark:text-cyan-400 text-sm font-medium mb-6">
+              <span className="w-2 h-2 rounded-full bg-pilow-ocean dark:bg-cyan-400 animate-pulse" />
               {badge}
             </motion.div>
 
@@ -87,7 +87,7 @@ export default function Hero(props: HeroProps = {}) {
               )}
             </h1>
 
-            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="text-lg sm:text-xl text-pilow-slate dark:text-gray-300 max-w-xl mx-auto lg:mx-0 mb-8">
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="text-lg sm:text-xl text-pilow-slate-dark dark:text-gray-300 max-w-xl mx-auto lg:mx-0 mb-8">
               {description}
             </motion.p>
 
@@ -108,7 +108,7 @@ export default function Hero(props: HeroProps = {}) {
               {stats?.map((stat, index) => (
                 <div key={index} className="text-center lg:text-left">
                   <div className="text-3xl font-bold gradient-text">{stat.value}</div>
-                  <div className="text-sm text-pilow-slate dark:text-gray-300">{stat.label}</div>
+                  <div className="text-sm text-pilow-slate-dark dark:text-gray-300">{stat.label}</div>
                 </div>
               ))}
             </motion.div>
@@ -126,16 +126,16 @@ export default function Hero(props: HeroProps = {}) {
                     <div className="w-3 h-3 rounded-full bg-yellow-400" />
                     <div className="w-3 h-3 rounded-full bg-green-400" />
                     <div className="flex-1 mx-4">
-                      <div className="bg-pilow-lavender-light rounded-full px-4 py-1 text-xs text-pilow-slate text-center">pilow.dev</div>
+                      <div className="bg-pilow-lavender-light rounded-full px-4 py-1 text-xs text-pilow-slate-dark text-center">pilow.dev</div>
                     </div>
                   </div>
                   <div className="flex-1 p-6 font-mono text-sm">
-                    <div className="text-pilow-slate-dark"><span className="text-pilow-ocean">const</span> project = {"{"}</div>
-                    <div className="pl-4 text-pilow-slate-dark"><span className="text-pilow-ocean">name</span>: <span className="text-green-600">&quot;Your Vision&quot;</span>,</div>
-                    <div className="pl-4 text-pilow-slate-dark"><span className="text-pilow-ocean">tech</span>: [<span className="text-green-600">&quot;Next.js&quot;</span>, <span className="text-green-600">&quot;React&quot;</span>],</div>
-                    <div className="pl-4 text-pilow-slate-dark"><span className="text-pilow-ocean">quality</span>: <span className="text-purple-600">Infinity</span>,</div>
+                    <div className="text-pilow-slate-dark"><span className="text-pilow-ocean-dark">const</span> project = {"{"}</div>
+                    <div className="pl-4 text-pilow-slate-dark"><span className="text-pilow-ocean-dark">name</span>: <span className="text-green-600">&quot;Your Vision&quot;</span>,</div>
+                    <div className="pl-4 text-pilow-slate-dark"><span className="text-pilow-ocean-dark">tech</span>: [<span className="text-green-600">&quot;Next.js&quot;</span>, <span className="text-green-600">&quot;React&quot;</span>],</div>
+                    <div className="pl-4 text-pilow-slate-dark"><span className="text-pilow-ocean-dark">quality</span>: <span className="text-purple-600">Infinity</span>,</div>
                     <div className="text-pilow-slate-dark">{"}"}</div>
-                    <div className="mt-4 text-pilow-slate-dark"><span className="text-pilow-ocean">pilow</span>.<span className="text-yellow-600">build</span>(project)</div>
+                    <div className="mt-4 text-pilow-slate-dark"><span className="text-pilow-ocean-dark">pilow</span>.<span className="text-yellow-600">build</span>(project)</div>
                   </div>
                 </div>
               </div>

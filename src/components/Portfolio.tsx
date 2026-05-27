@@ -101,7 +101,7 @@ export default function Portfolio({
         {showFilters && (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.2 }} className="flex flex-wrap justify-center gap-3 mb-12" role="tablist" aria-label="Filter by category">
             {categories.map((cat) => (
-              <button key={cat} onClick={() => setActiveCategory(cat)} role="tab" aria-selected={activeCategory === cat} className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === cat ? "bg-pilow-ocean text-white shadow-lg shadow-pilow-ocean/30" : "bg-pilow-lavender-light dark:bg-slate-700 text-pilow-slate dark:text-gray-200 hover:bg-pilow-lavender dark:hover:bg-slate-600"}`}>
+              <button key={cat} onClick={() => setActiveCategory(cat)} role="tab" aria-selected={activeCategory === cat} className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === cat ? "bg-pilow-ocean-dark dark:bg-cyan-400 text-white dark:text-slate-950 shadow-lg shadow-pilow-ocean/30" : "bg-pilow-lavender-light dark:bg-slate-700 text-pilow-slate-dark dark:text-gray-200 hover:bg-pilow-lavender dark:hover:bg-slate-600"}`}>
                 {cat === "All" ? "All" : categoryLabels[cat] || cat}
               </button>
             ))}
@@ -146,9 +146,9 @@ export default function Portfolio({
                 </motion.div>
               </div>
               <div className="p-6">
-                <span className="text-xs font-medium text-pilow-ocean uppercase tracking-wider">{categoryLabels[project.category] || project.category}</span>
+                <span className="text-xs font-medium text-pilow-ocean-dark dark:text-cyan-400 uppercase tracking-wider">{categoryLabels[project.category] || project.category}</span>
                 <h3 className="text-xl font-bold text-pilow-slate-dark dark:text-white mt-2 mb-3">{project.title}</h3>
-                <p className="text-pilow-slate dark:text-gray-300 text-sm mb-4 line-clamp-2">{project.description}</p>
+                <p className="text-pilow-slate-dark dark:text-gray-300 text-sm mb-4 line-clamp-2">{project.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((t) => (
                     <span key={t.tag} className="px-3 py-1 bg-pilow-lavender-light dark:bg-pilow-slate/50 text-pilow-slate-dark dark:text-gray-300 text-xs rounded-full">{t.tag}</span>

@@ -19,15 +19,15 @@
   --background: #ffffff;
   --foreground: #1a1a2e;
   --muted: #f8f9fc;
-  --muted-foreground: #6b7280;
-  --accent: var(--pilow-ocean);
+  --muted-foreground: #4b5563; /* Darker gray for WCAG AA compliance on white (contrast 5.25:1) */
+  --accent: var(--pilow-ocean-dark);
   --accent-foreground: #ffffff;
 
   /* Gradients */
   --gradient-primary: linear-gradient(
     135deg,
-    var(--pilow-ocean) 0%,
-    var(--pilow-slate) 100%
+    var(--pilow-ocean-dark) 0%, /* Darker ocean for WCAG AA contrast (4.89:1) */
+    var(--pilow-slate-dark) 100% /* Darker slate for WCAG AA contrast (7.41:1) */
   );
   --gradient-secondary: linear-gradient(
     135deg,

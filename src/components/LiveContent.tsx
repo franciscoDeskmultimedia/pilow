@@ -28,7 +28,7 @@ export default function LiveContent({
 
   return (
     <BlockRenderer
-      blocks={data?.layout || []}
+      blocks={data?.layout || page?.layout || []}
       services={services}
       projects={projects}
       testimonials={testimonials}

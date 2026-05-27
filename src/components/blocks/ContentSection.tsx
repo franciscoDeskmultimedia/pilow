@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 
+import { RichText } from "@payloadcms/richtext-lexical/react";
+
 interface ContentSectionProps {
   heading?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -18,7 +20,7 @@ export default function ContentSection({ heading, content, backgroundColor = "wh
   const bgClasses = {
     white: "bg-white dark:bg-[#0f1419]",
     gray: "bg-pilow-lavender-light dark:bg-pilow-slate-dark/20",
-    gradient: "bg-gradient-to-br from-pilow-ocean to-pilow-slate text-white",
+    gradient: "bg-gradient-to-br from-pilow-ocean-dark to-slate-900 text-white",
   };
 
   return (
@@ -36,11 +38,10 @@ export default function ContentSection({ heading, content, backgroundColor = "wh
           )}
           {content && (
             <div className="prose prose-lg dark:prose-invert mx-auto">
-              {/* Render rich text content - simplified for now */}
               {typeof content === "string" ? (
                 <p>{content}</p>
               ) : (
-                <div dangerouslySetInnerHTML={{ __html: String(content) }} />
+                <RichText data={content} />
               )}
             </div>
           )}
